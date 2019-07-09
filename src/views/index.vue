@@ -11,20 +11,22 @@ export default {
   data () {
     return {}
   },
-  created () {
+  async created () {
     // get 
-    this.$http.get.prototype.login({
+    let getres = await this.$http.get.prototype.login({
       name: 'asd'
     })
-    this.$http.get.prototype.search({
-      asdasd: 'sadasdasdasd'
-    })
+    console.log(getres)
+    // this.$http.get.prototype.search({
+    //   asdasd: 'sadasdasdasd'
+    // })
 
     // post
-    // this.$http.post.prototype.get1({
-    //   name: 1111,
-    //   str: [1, 2, 3]
-    // })
+    let postres = await this.$http.post.prototype.post1({
+      name: 1111,
+      str: [1, 2, 3]
+    })
+    console.log(postres)
     // request.matches();
     
     // console.log(this.$http.get.prototype)

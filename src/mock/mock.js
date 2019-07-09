@@ -1,13 +1,16 @@
-// import Mock from 'mockjs'
+import Mock from 'mockjs'
 
-// Mock.mock(RegExp('login' + '.*'), 'get', (option) => {
-//   console.log(option)
-// })
+Mock.mock(RegExp('login' + '.*'), 'get', (option) => {
+  // console.log(option)
+  return {
+    token: 'JNDJANDBBAHBSHB839',
+    username: 'admin',
+    psw: '123'
+  }
+})
 
-// Mock.mock('getitem', 'post', (option) => {
-//   console.log(option)
-//   return {
-//     a: 1,
-//     b: 2
-//   }
-// })
+Mock.mock('post1', 'post', (option) => {
+  return {
+    type: 'post'
+  }
+})
