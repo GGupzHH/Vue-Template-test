@@ -19,7 +19,7 @@ export default {
     console.log(getres)
 
     // post
-    let postres = await this.$http.post.prototype.post1({
+    let postres = await this.$http.post.prototype.login({
       name: 1111,
       str: [1, 2, 3]
     })

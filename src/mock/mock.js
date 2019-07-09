@@ -9,7 +9,7 @@ Mock.mock(RegExp('login' + '.*'), 'get', (option) => {
   }
 })
 
-Mock.mock('post1', 'post', (option) => {
+Mock.mock('login', 'post', (option) => {
   return {
     type: 'post'
   }
