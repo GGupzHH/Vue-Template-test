@@ -1,5 +1,5 @@
 import packing from './packing'
-import resfilter from './responsefilter'
+import resfilter from './resFilter/responsefilter'
 import apis from './api'
 console.log(resfilter)
 // 将定义好的各种接口引入，挂载 最后导出
