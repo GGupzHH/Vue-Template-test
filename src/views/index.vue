@@ -12,14 +12,11 @@ export default {
     return {}
   },
   async created () {
-    // get 
+    // get
     let getres = await this.$http.get.prototype.login({
       name: 'asd'
     })
     console.log(getres)
-    // this.$http.get.prototype.search({
-    //   asdasd: 'sadasdasdasd'
-    // })
 
     // post
     let postres = await this.$http.post.prototype.post1({
@@ -27,14 +24,6 @@ export default {
       str: [1, 2, 3]
     })
     console.log(postres)
-    // request.matches();
-    
-    // console.log(this.$http.get.prototype)
-    
-    // this.$http.post.prototype.getitem({
-    //   data: [1, 3, 4]
-    // })
-    // this.$http.post
   }
 }
 </script>
