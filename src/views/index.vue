@@ -8,14 +8,33 @@
 <script>
 // import request from "../api/matches/index";
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
-  created() {
+  created () {
+    // get 
+    this.$http.get.prototype.login({
+      name: 'asd'
+    })
+    this.$http.get.prototype.search({
+      asdasd: 'sadasdasdasd'
+    })
+
+    // post
+    // this.$http.post.prototype.get1({
+    //   name: 1111,
+    //   str: [1, 2, 3]
+    // })
     // request.matches();
-    console.log(this.$api.project.project_get());
+    
+    // console.log(this.$http.get.prototype)
+    
+    // this.$http.post.prototype.getitem({
+    //   data: [1, 3, 4]
+    // })
+    // this.$http.post
   }
-};
+}
 </script>
 
 <style>
