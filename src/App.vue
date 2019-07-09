@@ -6,15 +6,15 @@
 </template>
 
 <script>
-import headers from "./components/header";
+import headers from './components/header'
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   components: {
     headers
   }
-};
+}
 </script>
 <style>
 * {
