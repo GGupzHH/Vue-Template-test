@@ -1,10 +1,11 @@
 import axios from 'axios'
-
+import baseUrl from '../../config/env'
 // 创建 axios 实例
 let Http = axios.create({
   // headers: {'Content-Type': 'application/json'},
   // 设置请求超时
-  timeout: 60000
+  timeout: 60000,
+  baseURL: baseUrl
 })
 
 // 设置 post、put 默认 Content-Type
