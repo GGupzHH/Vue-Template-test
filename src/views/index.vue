@@ -12,14 +12,15 @@ export default {
     return {}
   },
   async created () {
+    console.log(this.$http)
     // get
-    let getres = await this.$http.get.prototype.login({
+    let getres = await this.$http.get.prototype.login(`/a`, {
       name: 'asd'
     })
     console.log(getres)
 
     // post
-    let postres = await this.$http.post.prototype.login({
+    let postres = await this.$http.post.prototype.login(`/a`, {
       name: 1111,
       str: [1, 2, 3]
     })

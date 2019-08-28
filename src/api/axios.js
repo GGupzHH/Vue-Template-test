@@ -1,6 +1,7 @@
 import axios from 'axios'
 import baseUrl from '../../config/env'
 // 创建 axios 实例
+console.log(baseUrl)
 let Http = axios.create({
   // headers: {'Content-Type': 'application/json'},
   // 设置请求超时
@@ -36,21 +37,22 @@ Http.interceptors.response.use(
   },
   error => {
     let info = {}
-    let { status, statusText, data } = error.response
+    console.log(error)
+    // let { status, statusText, data } = error.response
 
-    if (!error.response) {
-      info = {
-        code: 5000,
-        msg: 'Network Error'
-      }
-    } else {
-      // 此处整理错误信息格式
-      info = {
-        code: status,
-        data: data,
-        msg: statusText
-      }
-    }
+    // if (!error.response) {
+    //   info = {
+    //     code: 5000,
+    //     msg: 'Network Error'
+    //   }
+    // } else {
+    //   // 此处整理错误信息格式
+    //   info = {
+    //     code: status,
+    //     data: data,
+    //     msg: statusText
+    //   }
+    // }
     return info
   }
 )
