@@ -1,7 +1,9 @@
 <template>
   <div class="index">
     <div class="aside">hahah</div>
-    <div class="content">content</div>
+    <div class="content">
+      <upload @getImgFileList="getImgFileList"/>
+    </div>
   </div>
 </template>
 
@@ -10,6 +12,9 @@
 export default {
   data () {
     return {}
+  },
+  components: {
+    upload: () => import('../components/upload')
   },
   async created () {
     console.log(this.$http)
@@ -25,7 +30,12 @@ export default {
       str: [1, 2, 3]
     })
     console.log(postres)
-  }
+  },
+  methods: {
+    getImgFileList (FileList) {
+      console.log(FileList)
+    }
+  },
 }
 </script>
 
@@ -34,7 +44,7 @@ export default {
   height: 100%;
   min-height: 400px;
   flex: 1;
-  background-color: blue;
+  /* background-color: blue; */
   margin: 50px !important;
   display: flex;
 }
@@ -46,6 +56,6 @@ export default {
 .index .content {
   height: 100%;
   flex: 1;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 </style>
