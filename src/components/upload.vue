@@ -41,9 +41,9 @@ export default {
       // new MouseEvent('click') 创建自定义事件
       $event.path[0].previousSibling.dispatchEvent(new MouseEvent('click'))
     },
-    inputFile ($enevt) {
+    inputFile ($event) {
       let that = this
-      let file = $enevt.path[0].files[0]
+      let file = $event.path[0].files[0]
       let imgSrc
       // FileReader 读取文件
 
@@ -66,8 +66,8 @@ export default {
         // 获取文件的DataURL
         imgSrc = this.result
         that.Imgpath.push(imgSrc)
-        that.Imgfile.push($enevt.path[0].files[0])
-        $enevt.path[0].value = null
+        that.Imgfile.push($event.path[0].files[0])
+        $event.path[0].value = null
       }
     }
   }
