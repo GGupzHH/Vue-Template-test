@@ -1,4 +1,5 @@
 let baseUrl = ''
+console.log(process.env)
 switch (process.env.NODE_ENV) {
   case 'development':
     baseUrl = 'http://127.0.0.1:8005'
