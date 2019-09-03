@@ -46,23 +46,22 @@ export default {
       let file = $event.path[0].files[0]
       let imgSrc
       // FileReader 读取文件
-
       // 1、FileReader接口的方法
-      // readAsBinaryString	file	将文件读取为二进制编码
-      // readAsText	file,[encoding]	将文件读取为文本
-      // readAsDataURL	file	将文件读取为DataURL
-      // abort	(none)	终端读取操作
+      // readAsBinaryString file 将文件读取为二进制编码
+      // readAsText file,[encoding]将文件读取为文本
+      // readAsDataURL file 将文件读取为DataURL
+      // abort (none) 终端读取操作
 
       // 2、FileReader接口事件
-      // onabort	中断
-      // onerror	出错
-      // onloadstart	开始
-      // onprogress	正在读取
-      // onload	成功读取
-      // onloadend	读取完成，无论成功失败
+      // onabort 中断
+      // onerror 出错
+      // onloadstart 开始
+      // onprogress 正在读取
+      // onload 成功读取
+      // onloadend 读取完成，无论成功失败
       let reader = new FileReader()
       reader.readAsDataURL(file)
-      reader.onload = function() {
+      reader.onload = function () {
         // 获取文件的DataURL
         imgSrc = this.result
         that.Imgpath.push(imgSrc)

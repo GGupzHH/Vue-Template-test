@@ -1,7 +1,25 @@
 <template>
   <div class="index">
-    <div class="aside">hahah</div>
+    <div class="aside" v-cloak>
+      {{ name }}
+    </div>
     <div class="content">
+      <div v-cloak>
+        <p>案发代码</p>
+        <img src="../assets/微信截图_20190903183950.png" alt="">
+        <p>
+          当我们网速很慢的时候， 在页面的HTML中是可以看到模板语法的， 这样就显的你的网页很low
+        </p>
+        <p>解决方案</p>
+        <p>HTML</p>
+        <img src="../assets/微信截图_20190903184158.png" alt="">
+        <p>CSS</p>
+        <code>
+          [v-cloak] {<br>
+          &nbsp;&nbsp;display: none;<br>
+          }
+        </code>
+      </div>
       <upload @getImgFileList="getImgFileList"/>
     </div>
   </div>
@@ -11,7 +29,10 @@
 // import request from "../api/matches/index";
 export default {
   data () {
-    return {}
+    return {
+      name: 'vueprojectcatalog',
+      items: []
+    }
   },
   components: {
     upload: () => import('../components/upload')
@@ -35,11 +56,11 @@ export default {
     getImgFileList (FileList) {
       console.log(FileList)
     }
-  },
+  }
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 .index {
   height: 100%;
   min-height: 400px;
@@ -47,15 +68,10 @@ export default {
   /* background-color: blue; */
   margin: 50px !important;
   display: flex;
-}
-.index .aside {
-  width: 100px;
-  height: 100%;
-  background-color: brown;
-}
-.index .content {
-  height: 100%;
-  flex: 1;
-  /* background-color: aquamarine; */
+  .aside {
+    // width: 100px;
+    height: 100%;
+    background-color: brown;
+  }
 }
 </style>
