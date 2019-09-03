@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <div class="aside">hahah</div>
+    <div class="aside" v-cloak>{{ name }}</div>
     <div class="content">
       <upload @getImgFileList="getImgFileList"/>
     </div>
@@ -11,7 +11,9 @@
 // import request from "../api/matches/index";
 export default {
   data () {
-    return {}
+    return {
+      name: 'vueprojectcatalog'
+    }
   },
   components: {
     upload: () => import('../components/upload')
@@ -35,7 +37,7 @@ export default {
     getImgFileList (FileList) {
       console.log(FileList)
     }
-  },
+  }
 }
 </script>
 
