@@ -1,8 +1,6 @@
 <template>
   <div class="index">
-    <div class="aside" v-cloak>
-      {{ name }}
-    </div>
+    <div class="aside" v-cloak>{{ name }}</div>
     <div class="content">
       <div v-cloak>
         <p>案发代码</p>
@@ -30,8 +28,7 @@
 export default {
   data () {
     return {
-      name: 'vueprojectcatalog',
-      items: []
+      name: 'vueprojectcatalog'
     }
   },
   components: {
