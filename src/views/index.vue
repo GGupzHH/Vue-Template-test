@@ -1,6 +1,9 @@
 <template>
   <div class="index">
-    <div class="aside" v-cloak>{{ name }}</div>
+    <div class="aside" v-cloak>
+      {{ name }}
+      <router-link to="/inputModel">inputModel</router-link>
+    </div>
     <div class="content">
       <div v-cloak>
         <p>案发代码</p>

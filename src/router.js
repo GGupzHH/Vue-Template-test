@@ -11,6 +11,10 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Index
+    }, {
+      path: '/inputModel',
+      name: 'inputModel',
+      component: () => import('./components/for-model.vue')
     }
     // {
     //   path: '/about',
