@@ -19,6 +19,10 @@ export default new Router({
       path: '/upload',
       name: 'upload',
       component: () => import('./components/upload.vue')
+    }, {
+      path: '/eventBus',
+      name: 'eventBus',
+      component: () => import('./components/EventBus.vue')
     }
     // {
     //   path: '/about',

@@ -2,7 +2,10 @@
   <div class="index">
     <div class="aside" v-cloak>
       <router-link to="/inputModel">inputModel</router-link>
+      <br>
       <router-link to="/upload">upload</router-link>
+      <br>
+      <router-link to="/eventBus">EventBus</router-link>
     </div>
     <div class="content">
       <div v-cloak>
