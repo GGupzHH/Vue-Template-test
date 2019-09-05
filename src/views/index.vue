@@ -1,8 +1,8 @@
 <template>
   <div class="index">
     <div class="aside" v-cloak>
-      {{ name }}
       <router-link to="/inputModel">inputModel</router-link>
+      <router-link to="/upload">upload</router-link>
     </div>
     <div class="content">
       <div v-cloak>
@@ -21,7 +21,6 @@
           }
         </code>
       </div>
-      <upload @getImgFileList="getImgFileList"/>
     </div>
   </div>
 </template>
@@ -35,7 +34,6 @@ export default {
     }
   },
   components: {
-    upload: () => import('../components/upload')
   },
   async created () {
     console.log(this.$http)

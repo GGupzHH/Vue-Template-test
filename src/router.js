@@ -15,6 +15,10 @@ export default new Router({
       path: '/inputModel',
       name: 'inputModel',
       component: () => import('./components/for-model.vue')
+    }, {
+      path: '/upload',
+      name: 'upload',
+      component: () => import('./components/upload.vue')
     }
     // {
     //   path: '/about',
