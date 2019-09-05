@@ -1,6 +1,9 @@
 <template>
   <div class=''>
     event - B
+    <div>
+      {{ msg }}
+    </div>
   </div>
 </template>
 
@@ -9,7 +12,7 @@ import EventBus from '../../utils/EventBus'
 export default {
   data () {
     return {
-      
+      msg: ''
     }
   },
   components: {},
@@ -22,6 +25,14 @@ export default {
   methods: {
   },
   mounted () {
+    EventBus.$on('eventA', (msg) => {
+      console.log()
+      this.msg = msg
+    })
+    // 移除某个事件监听  必须在事件接收之后移除！！！！！！！！！！！
+    // EventBus.$off('eventA')
+    // 移除所有事件监听
+    EventBus.$off()
   }
 }
 </script>
