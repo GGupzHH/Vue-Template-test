@@ -39,6 +39,11 @@ export default {
   components: {
   },
   async created () {
+    console.log(this.$type)
+    console.log(this.$type.isNull(undefined))
+    console.log(this.$type.isNull(null))
+    console.log(this.$type.isArray([]))
+    console.log(this.$type.isArray({}))
     console.log(this.$http)
     // get
     let getres = await this.$http.get.prototype.login(`/a`, {

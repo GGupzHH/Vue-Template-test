@@ -6,8 +6,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import api from './api/mount'
 import './mock/mock'
+import TYPE_JUDGE from './utils/TypeJudge'
 Vue.use(api)
 Vue.use(ElementUI)
+Vue.use(TYPE_JUDGE)
 
 Vue.config.productionTip = false
 
