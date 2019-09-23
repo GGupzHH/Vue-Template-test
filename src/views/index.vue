@@ -25,6 +25,10 @@
         </code>
       </div>
     </div>
+    <div class="button" @click="wavesEffect">
+      <p>水波纹效果</p>
+      <div class="wavesbtn" ref="wavesbtn"></div>
+    </div>
   </div>
 </template>
 
@@ -61,6 +65,37 @@ export default {
   methods: {
     getImgFileList (FileList) {
       console.log(FileList)
+    },
+    wavesEffect(e) {
+      e = e || window.event;
+      let position = e.target.getBoundingClientRect();
+      let doc = document.documentElement;
+      let div = document.createElement("div");
+      div.className = "effect";
+      this.$refs.wavesbtn.appendChild(div);
+
+      let top = e.pageY - (position.top + window.pageYOffset) - doc.clientTop;
+      let left =
+        e.pageX - (position.left + window.pageXOffset) - doc.clientLeft;
+      let dur = 750;
+      div.style = `
+        left:${left}px;
+        top:${top}px;
+        transform:scale(20);
+        transition-duration: 1s;
+        transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);`;
+      setTimeout(() => {
+        div.style = `
+        transition-duration: 1s;
+        transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        opacity:0;
+        left:${left}px;
+        top:${top}px;
+        transform:scale(20);`;
+        setTimeout(() => {
+          this.$refs.wavesbtn.removeChild(div);
+        }, dur);
+      }, 100);
     }
   }
 }
@@ -79,5 +114,45 @@ export default {
     height: 100%;
     background-color: brown;
   }
+}
+.button {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  line-height: 50px;
+  text-align: center;
+  border: 1px solid red;
+  position: relative;
+  overflow: hidden;
+}
+p {
+  width: 100%;
+  line-height: 48px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.wavesbtn {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+</style>
+<style>
+.effect {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.7s ease-out;
+  background: #ff83fa;
+  transform: scale(0);
+  transition-property: transform, opacity, -webkit-transform;
+  opacity: 1;
+  pointer-events: none;
 }
 </style>
