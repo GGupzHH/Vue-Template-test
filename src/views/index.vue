@@ -25,9 +25,11 @@
         </code>
       </div>
     </div>
-    <div class="button" @click="wavesEffect">
-      <p>水波纹效果</p>
-      <div class="wavesbtn" ref="wavesbtn"></div>
+    <div class="btn" @click="btns">
+      <div class="button" @click="wavesEffect">
+        <p>水波纹效果</p>
+        <div class="wavesbtn" ref="wavesbtn"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,27 +65,48 @@ export default {
     console.log(postres)
   },
   methods: {
+    btns () {
+      console.log(1)
+    },
     getImgFileList (FileList) {
       console.log(FileList)
     },
     wavesEffect(e) {
       e = e || window.event;
+      // getBoundingClientRect 获取当期元素在页面中的 上下左右的位置
+      // rectObject.top：      元素上边到视窗上边的距离;
+      // rectObject.right：    元素右边到视窗左边的距离;
+      // rectObject.bottom：   元素下边到视窗上边的距离;
+      // rectObject.left：     元素左边到视窗左边的距离;
+      // rectObject.width：    是元素自身的宽
+      // rectObject.height     是元素自身的高
       let position = e.target.getBoundingClientRect();
+      //  获取<html></html>标签
       let doc = document.documentElement;
+      // 创建一个div
       let div = document.createElement("div");
+      // 给div 添加类名effect
       div.className = "effect";
+      // 给页面中的元素添加刚创建好的div 
       this.$refs.wavesbtn.appendChild(div);
-
+      // window.pageYOffset 垂直方向页面卷曲高度
+      // window.pageXOffset 水平方向页面卷曲像素
+      // pageY 鼠标距离当前浏览器窗口的
+      // clientTop 获取当前元素边框距离
       let top = e.pageY - (position.top + window.pageYOffset) - doc.clientTop;
-      let left =
-        e.pageX - (position.left + window.pageXOffset) - doc.clientLeft;
-      let dur = 750;
+      let left = e.pageX - (position.left + window.pageXOffset) - doc.clientLeft;
+      let dur = 75000;
+      console.log(left)
+      // scale 放大 20 倍
+      // transition-duration  过渡效果持续的时间
+      // transition-timing-function 定义过渡曲线
       div.style = `
         left:${left}px;
         top:${top}px;
         transform:scale(20);
         transition-duration: 1s;
         transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);`;
+
       setTimeout(() => {
         div.style = `
         transition-duration: 1s;
