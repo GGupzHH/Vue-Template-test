@@ -28,7 +28,7 @@
     <span></span>
     <div class="wave-btn">
       <wavesbtn
-        btn_text = "按钮"
+        btn_text = "按钮asasdasdasdasdaasdasdsdasd"
         duration = '1.2'
         wave_bg = '#1395fd'
         wave_r = '150px'
@@ -93,6 +93,6 @@ export default {
 }
 .wave-btn {
   width: 150px;
-  height: 45px;
+  height: 100px;
 }
 </style>
