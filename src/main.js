@@ -7,6 +7,7 @@ import store from './store'
 import api from './api/mount'
 import './mock/mock'
 import TYPE_JUDGE from './utils/TypeJudge'
+import './style/reset.less'
 Vue.use(api)
 Vue.use(ElementUI)
 Vue.use(TYPE_JUDGE)

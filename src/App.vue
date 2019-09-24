@@ -17,10 +17,6 @@ export default {
 }
 </script>
 <style>
-* {
-  padding: 0px !important;
-  margin: 0px !important;
-}
 html,
 body {
   min-width: 1366px !important;

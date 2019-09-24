@@ -25,12 +25,14 @@
         </code>
       </div>
     </div>
-    <div>
-      <div class="button" @click="wavesEffect">
-        <p>水波纹效果</p>
-        <svg class="wavesbtn" ref="wavesbtn" version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-        </svg>
-      </div>
+    <span></span>
+    <div class="wave-btn">
+      <wavesbtn
+        btn_text = "按钮"
+        duration = '1.2'
+        wave_bg = '#1395fd'
+        wave_r = '150px'
+      ></wavesbtn>
     </div>
   </div>
 </template>
@@ -44,6 +46,7 @@ export default {
     }
   },
   components: {
+    wavesbtn: () => import('../components/WaveBtn')
   },
   async created () {
     console.log(this.$type)
@@ -71,48 +74,6 @@ export default {
     },
     getImgFileList (FileList) {
       console.log(FileList)
-    },
-    wavesEffect(e) {
-      e = e || window.event;
-      // getBoundingClientRect 获取当期元素在页面中的 上下左右的位置
-      // rectObject.top：      元素上边到视窗上边的距离;
-      // rectObject.right：    元素右边到视窗左边的距离;
-      // rectObject.bottom：   元素下边到视窗上边的距离;
-      // rectObject.left：     元素左边到视窗左边的距离;
-      // rectObject.width：    是元素自身的宽
-      // rectObject.height     是元素自身的高
-      let position = e.target.getBoundingClientRect();
-      //  获取<html></html>标签
-      let doc = document.documentElement;
-      // 创建一个circle  因为svg属于XML   使用HTML的添加方法是浏览器是不渲染的   所以要使用对应的API
-      let c = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-      // 创建的circle多久之后删除元素
-      let dur = 7500;
-      this.$refs.wavesbtn.appendChild(c)
-      // scale 放大 20 倍
-      // transition-duration  过渡效果持续的时间
-      // transition-timing-function 定义过渡曲线
-      c.setAttribute('cx', e.offsetX)
-      c.setAttribute('cy', e.offsetY)
-      c.setAttribute('r', 1)
-      c.setAttribute('fill', 'rgba(255,255,255,1)')
-      // let div = document.querySelector('.circle')
-      // div.style = `
-      //   transform:scale(20);
-      //   transition-duration: 1s;
-      //   transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);`;
-
-      setTimeout(() => {
-        c.style = `
-        transition-duration: .4s;
-        transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        opacity:0;`;
-        c.setAttribute('r', 150)
-        // this.$refs.wavesbtn.innerHTML = `<circle cx=${left} cy=${top} r="100" stroke="blue" stroke-width="2" fill="red"></circle>`
-        setTimeout(() => {
-          this.$refs.wavesbtn.removeChild(c);
-        }, dur);
-      }, 10);
     }
   }
 }
@@ -123,8 +84,6 @@ export default {
   height: 100%;
   min-height: 400px;
   flex: 1;
-  /* background-color: blue; */
-  margin: 50px !important;
   display: flex;
   .aside {
     // width: 100px;
@@ -132,37 +91,8 @@ export default {
     background-color: brown;
   }
 }
-.button {
+.wave-btn {
   width: 150px;
-  height: 50px;
-  border-radius: 10px;
-  line-height: 50px;
-  text-align: center;
-  border: 1px solid red;
-  position: relative;
-  overflow: hidden;
-  background-color: aquamarine;
-}
-p {
-  width: 100%;
-  line-height: 48px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-}
-
-// .wavesbtn {
-//   width: 100%;
-//   height: 100%;
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-// }
-</style>
-<style>
-svg {
-  width: 100%;
-  height: 100%;
+  height: 45px;
 }
 </style>
