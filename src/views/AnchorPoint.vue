@@ -1,21 +1,37 @@
 <template>
   <div class=''>
-    <aside ref="aside" @click="getActive">
-      <a href="#miao" class="active">miao</a>
-      <a href="#miao1">miao1</a>
-      <a href="#miao2">miao2</a>
-      <a href="#miao3">miao3</a>
-      <a href="#miao4">miao4</a>
-      <a href="#miao5">miao5</a>
+    <aside ref="aside">
+      <ul>
+        <li v-for="(item, index) in aside_list" :key="index" :class="!index ? 'active' : ''" @click="getActive($event, index)">{{ item }}</li>
+      </ul>
     </aside>
   <main>
     <div class="box">
-      <div class="box-child" id="miao">miao</div>
-      <div class="box-child" id="miao1">miao1</div>
-      <div class="box-child" id="miao2">miao2</div>
-      <div class="box-child" id="miao3">miao3</div>
-      <div class="box-child" id="miao4">miao4</div>
-      <div class="box-child" id="miao5">miao5</div>
+      <div class="box-child">按钮1
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <hr>
+      </div>
+      <div class="box-child">按钮2
+        <br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br>
+        <br>
+      </div>
+      <div class="box-child">按钮3
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br>
+      </div>
+      <div class="box-child">按钮4
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+      </div>
+      <div class="box-child">按钮5
+        <br><br><br><br><br>
+      </div>
+      <div class="box-child">按钮6</div>
+      <div class="box-child">按钮6</div>
+      <div class="box-child">按钮6</div>
     </div>
   </main>
   </div>
@@ -26,24 +42,32 @@
 export default {
   data() {
     return {
-      
+      aside_list: ['按钮1', '按钮2','按钮3', '按钮4','按钮5', '按钮6','按钮7', '按钮8']
     }
   },
   methods: {
-    getActive (e) {
-      e = e || window.event
-      if (e.target.nodeName === 'A') {
+    getActive (e, index) {
+      // e = e || window.event
+      if (e.target.nodeName === 'LI') {
         document.querySelector('.active').className = ''
         e.target.className = 'active'
       }
-      console.dir(e.target)
-      console.log(document.querySelector('.active'))
-      
+      let boxChild = document.querySelectorAll('.box-child')
+      let total = boxChild[index].offsetTop
+      document.documentElement.scrollTop = total
+      window.pageYOffset = total
+    },
+    onScroll (e) {
+      let scrolled = document.documentElement.scrollTop
+      // console.log(scrolled)
+      console.log(e)
     }
   },
   mounted() {
-    console.log(this.$refs)
-  },
+    this.$nextTick(() => {
+      window.addEventListener('scroll', this.onScroll)
+    })
+  }
 }
 </script>
 <style lang='less' scoped>
@@ -60,15 +84,18 @@ aside {
   background-color: #fff;
   color: rgb(253, 175, 175);
   overflow: auto;
-  a {
-    display: block;
-    width: 100%;
-    line-height: 40px;
-    background-color: pink;
-    padding-left: 20px;
-    box-sizing: border-box;
+  ul {
+    li {
+      display: block;
+      width: 100%;
+      line-height: 40px;
+      background-color: pink;
+      padding-left: 20px;
+      box-sizing: border-box;
+      color: #000;
+    }
   }
-  a.active {
+  li.active {
     color: aqua;
   }
 }
@@ -79,7 +106,6 @@ main {
   .box {
     margin-top: 50px;
     div.box-child {
-      height: 400px;
       background-color: #6e78ff;
       margin-bottom: 25px;
     }
