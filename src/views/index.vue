@@ -6,6 +6,8 @@
       <router-link to="/upload">upload</router-link>
       <br>
       <router-link to="/eventBus">EventBus</router-link>
+      <br>
+      <router-link to="/anchorPoint">AnchorPoint</router-link>
     </div>
     <div class="content">
       <div v-cloak>

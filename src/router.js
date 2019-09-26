@@ -21,6 +21,10 @@ const constantRoutes = [
     path: '/eventBus',
     name: 'eventBus',
     component: () => import('./components/EventBus.vue')
+  }, {
+    path: '/anchorPoint',
+    name: 'anchorPoint',
+    component: () => import('./views/AnchorPoint.vue')
   }
   // {
   //   path: '/about',
