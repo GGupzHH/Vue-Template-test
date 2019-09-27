@@ -57,15 +57,51 @@ export default {
       document.documentElement.scrollTop = total
       window.pageYOffset = total
     },
-    onScroll (e) {
-      let scrolled = document.documentElement.scrollTop
+    // 防抖
+    throttle (fn) {
+      let on_off = true
+      let that = this
+      return function () {
+        if (!on_off) return
+        on_off = false
+        setTimeout(() => {
+          that.onScroll()
+          on_off = true
+        }, 500)
+      }
+    },
+    onScroll () {
+      // let scrolled = document.documentElement.scrollTop
       // console.log(scrolled)
-      console.log(e)
+      // console.log(e)
+      let boxChildAll = document.querySelectorAll('.box-child')
+      // console.log(boxChildAll)
+      let minTop = boxChildAll[boxChildAll.length - 1].getBoundingClientRect().top
+      let activeItem = 0
+      // console.log(minTop)
+      for (let i = 0; i < boxChildAll.length; i++) {
+        // console.log(boxChildAll[i].getBoundingClientRect().top)
+        if (boxChildAll[i].getBoundingClientRect().top < 0) {
+          if (minTop > -boxChildAll[i].getBoundingClientRect().top) {
+            activeItem = i
+            minTop = minTop > -boxChildAll[i].getBoundingClientRect().top ? -boxChildAll[i].getBoundingClientRect().top : minTop
+          }
+        } else if (boxChildAll[i].getBoundingClientRect().top === 0) {
+          activeItem = i
+        } else {
+          if (minTop > boxChildAll[i].getBoundingClientRect().top) {
+            activeItem = i
+            minTop = minTop > boxChildAll[i].getBoundingClientRect().top ? boxChildAll[i].getBoundingClientRect().top : minTop
+          }
+        }
+        // boxChildAll[i].hiegh
+      }
+      console.log(activeItem)
     }
   },
   mounted() {
     this.$nextTick(() => {
-      window.addEventListener('scroll', this.onScroll)
+      window.addEventListener('scroll', this.throttle(this.onScroll))
     })
   }
 }
