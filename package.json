@@ -12,6 +12,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "element-ui": "^2.9.2",
+    "iview": "^3.5.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "mockjs": "^1.0.1-beta3",

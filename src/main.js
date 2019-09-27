@@ -8,8 +8,11 @@ import api from './api/mount'
 import './mock/mock'
 import TYPE_JUDGE from './utils/TypeJudge'
 import './style/reset.less'
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'
 Vue.use(api)
 Vue.use(ElementUI)
+Vue.use(iView)
 Vue.use(TYPE_JUDGE)
 
 Vue.config.productionTip = false

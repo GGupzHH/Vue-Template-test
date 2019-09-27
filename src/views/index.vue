@@ -8,6 +8,7 @@
       <router-link to="/eventBus">EventBus</router-link>
       <br>
       <router-link to="/anchorPoint">AnchorPoint</router-link>
+      <router-link to="/AnchorPoint-2">AnchorPoint-2</router-link>
     </div>
     <div class="content">
       <div v-cloak>
