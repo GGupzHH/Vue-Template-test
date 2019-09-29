@@ -25,6 +25,10 @@ const constantRoutes = [
     path: '/anchorPoint',
     name: 'anchorPoint',
     component: () => import('./views/AnchorPoint.vue')
+  }, {
+    path: '/testChart',
+    name: 'testChart',
+    component: () => import('./views/testChart.vue')
   }
   // {
   //   path: '/about',

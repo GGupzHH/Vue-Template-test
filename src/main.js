@@ -10,11 +10,13 @@ import TYPE_JUDGE from './utils/TypeJudge'
 import './style/reset.less'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+import echarts from 'echarts'
+
 Vue.use(api)
 Vue.use(ElementUI)
 Vue.use(iView)
 Vue.use(TYPE_JUDGE)
-
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 
 new Vue({
