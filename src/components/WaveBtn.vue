@@ -51,7 +51,6 @@ export default {
 }
 </script>
 <style scoped lang="less">
-@import url('../style/encapsulation.less');
 svg {
   width: 100%;
   height: 100%;

@@ -1,10 +1,5 @@
+const path = require('path')
 module.exports = {
-  devServer: {
-    overlay: {
-      warnings: false,
-      errors: false
-    }
-  }
   // configureWebpack: {
   //   performance: {
   //     hints: 'warning',
@@ -17,4 +12,16 @@ module.exports = {
   //     }
   //   }
   // }
+  devServer: {
+    overlay: {
+      warnings: false,
+      errors: false
+    }
+  },
+  pluginOptions: {
+    'style-resources-loader': {
+      preProcessor: 'less',
+      patterns: [path.resolve(__dirname, './src/style/encapsulation.less')]
+    }
+  }
 }
