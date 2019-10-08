@@ -50,10 +50,14 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style scoped lang="less">
+@import url('../style/encapsulation.less');
 svg {
   width: 100%;
   height: 100%;
+  // .fz(12px);
+  // .fz(12px, 20px);
+  .fz(12px, 20px);
 }
 .button {
   width: 100%;
