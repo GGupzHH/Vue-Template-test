@@ -60,9 +60,9 @@
 </template>
 
 <script>
+// 接收vuex 中的所有对象 解构到mapState   mapState中是vuex中state中保存的数据
 import { mapState } from 'vuex'
-// import request from "../api/matches/index";
-// console.log(mapState())
+// mapState 相当于局部的去使用vuex中state的数据 
 export default {
   data () {
     return {
@@ -70,12 +70,15 @@ export default {
     }
   },
   computed: {
+    // 展开运算符将mapState函数返回的vuex中state保存的数据放到局部的计算属性中 这样就可以局部的使用vuex中定义的state
+    // 好处： 减少vuex state中定义数据太多
     ...mapState({
       'count': strat => {
         console.log(strat)
         return strat.count + '~'
       }
     }),
+    // -----计算属性对应的函数不能使用箭头函数  箭头函数没有this 就拿不到vm实例
     names: function () {
       console.log(this.name)
 
