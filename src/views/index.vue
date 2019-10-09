@@ -40,6 +40,20 @@
         wave_r = '150px'
       ></wavesbtn>
     </div>
+    <div>
+      <p>Vuex</p>
+      <span>{{ $store.state.count }}</span>
+      <span @click="addCount(10)">+</span>
+      <span @click="reduceCount(1)">-</span>
+      <span @click="actionsAddCount('异步')">异步</span>
+      <p>getters</p>
+      <!-- getters 相当于计算属性  对state的数据进行二次处理 -->
+      <span>{{ $store.getters.devCount }}</span><br>
+      <!-- getters 二次接收 -->
+      <span>{{ $store.getters.devCount_ }}</span><br>
+      <!-- getters 通过方法访问 -->
+      <span>{{ $store.getters.devCount_fn(2) }}</span><br>
+    </div>
   </div>
 </template>
 
@@ -75,6 +89,15 @@ export default {
     console.log(postres)
   },
   methods: {
+    actionsAddCount (n) {
+      this.$store.dispatch('actionsAddCount', n)
+    },
+    reduceCount (n) {
+      this.$store.commit('reduceCount', n)
+    },
+    addCount (n) {
+      this.$store.commit('addCount', n)
+    },
     btns () {
       console.log(1)
     },
@@ -88,6 +111,8 @@ export default {
 <style lang="less" scoped>
 .index {
   height: 100%;
+  padding-top: 50px;
+  box-sizing: border-box;
   min-height: 400px;
   flex: 1;
   display: flex;
