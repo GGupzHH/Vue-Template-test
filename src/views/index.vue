@@ -43,6 +43,8 @@
     <div>
       <p>Vuex</p>
       <span>{{ $store.state.count }}</span>
+      <span>{{ count }}</span>
+      <span>{{ names }}</span>
       <span @click="addCount(10)">+</span>
       <span @click="reduceCount(1)">-</span>
       <span @click="actionsAddCount('异步')">异步</span>
@@ -58,11 +60,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 // import request from "../api/matches/index";
+// console.log(mapState())
 export default {
   data () {
     return {
       name: 'vueprojectcatalog'
+    }
+  },
+  computed: {
+    ...mapState({
+      'count': strat => {
+        console.log(strat)
+        return strat.count + '~'
+      }
+    }),
+    names: function () {
+      console.log(this.name)
+
+      return this.name + '---------'
     }
   },
   components: {
