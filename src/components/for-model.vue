@@ -17,6 +17,16 @@ export default {
       inputModel: {}
     }
   },
+  props: {
+    names: {
+      // 基础类型的检查   多个可能的类型
+      type: [String, Number],
+      // 是否必填
+      required: false,
+      // 默认值
+      default: 100
+    }
+  },
   components: {},
   computed: {},
   watch: {},
