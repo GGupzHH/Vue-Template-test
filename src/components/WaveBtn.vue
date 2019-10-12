@@ -56,16 +56,13 @@ svg {
   height: 100%;
   // .fz(12px);
   // .fz(12px, 20px);
-  .fz(12px, 20px);
 }
 .button {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-color: aquamarine;
   cursor: pointer;
 }
 p {

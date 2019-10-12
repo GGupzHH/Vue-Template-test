@@ -34,10 +34,11 @@
     <span></span>
     <div class="wave-btn">
       <wavesbtn
+        class="wavesbtn"
         btn_text = "按钮asasdasdasdasdaasdasdsdasd"
-        duration = '1.2'
+        duration = '.4'
         wave_bg = '#1395fd'
-        wave_r = '150px'
+        wave_r = '200px'
       ></wavesbtn>
     </div>
     <div>
@@ -145,5 +146,12 @@ export default {
 .wave-btn {
   width: 150px;
   height: 100px;
+  background-color: pink;
+  border-radius: 30px;
+  overflow: hidden;
+  transition: all .2s;
+}
+.wave-btn:hover {
+  background-color: red;
 }
 </style>
