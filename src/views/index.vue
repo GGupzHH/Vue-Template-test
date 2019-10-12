@@ -33,13 +33,13 @@
     </div>
     <span></span>
     <div class="wave-btn">
-      <wavesbtn
+      <WaveBtn
         class="wavesbtn"
         btn_text = "按钮asasdasdasdasdaasdasdsdasd"
         duration = '.4'
         wave_bg = '#1395fd'
         wave_r = '200px'
-      ></wavesbtn>
+      ></WaveBtn>
     </div>
     <div>
       <p>Vuex</p>
@@ -87,7 +87,7 @@ export default {
     }
   },
   components: {
-    wavesbtn: () => import('../components/WaveBtn')
+    // wavesbtn: () => import('../components/WaveBtn')
   },
   async created () {
     console.log(this.$type)

@@ -12,7 +12,10 @@ import './style/encapsulation.less'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import echarts from 'echarts'
+// import component
+import Wavebtn from './components/public/WaveBtn/WaveBtn.js'
 
+Vue.use(Wavebtn)
 Vue.use(api)
 Vue.use(ElementUI)
 Vue.use(iView)
