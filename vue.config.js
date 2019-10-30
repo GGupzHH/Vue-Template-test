@@ -3,6 +3,12 @@ module.exports = {
   // 是配置在本地项目启动的时候追加到URL后面的内容
   // http://172.30.24.109:8080/ZHH/zhh/upload
   publicPath: '/ZHH/zhh',
+  // 打包的文件目录 打包时会自动替换
+  outputDir: 'dist',
+  // 暂时没有搞明白
+  assetsDir: './status/ZHH',
+  // 指定生成的静态文件路径       default:index.html
+  indexPath: 'index.html',
   // configureWebpack: {
   //   performance: {
   //     hints: 'warning',
