@@ -1,5 +1,7 @@
 const path = require('path')
 module.exports = {
+  // 是配置在本地项目启动的时候追加到URL后面的内容
+  // http://172.30.24.109:8080/ZHH/zhh/upload
   publicPath: '/ZHH/zhh',
   // configureWebpack: {
   //   performance: {
