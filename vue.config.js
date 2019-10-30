@@ -1,5 +1,6 @@
 const path = require('path')
 module.exports = {
+  publicPath: '/ZHH/zhh',
   // configureWebpack: {
   //   performance: {
   //     hints: 'warning',
@@ -18,6 +19,7 @@ module.exports = {
       errors: false
     }
   },
+  // 将封装的less全局引入 需要安装插件 style-resources-loader
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'less',
