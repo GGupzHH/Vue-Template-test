@@ -9,10 +9,16 @@ module.exports = {
   assetsDir: './status/ZHH',
   // 指定生成的静态文件路径       default:index.html
   indexPath: 'index.html',
+  // 配置vue多页应用
+  // pages: Object
+  // 是否在开发环境下通过eslint-loader   lint 代码
+  // 设置为 true 时，eslint-loader 会将 lint 错误输出为编译警告。默认情况下，警告仅仅会被输出到命令行，且不会使得编译失败。
+  // 如果你希望让 lint 错误在开发时直接显示在浏览器中，你可以使用 lintOnSave: 'error'。这会强制 eslint-loader 将 lint 错误输出为编译错误，同时也意味着 lint 错误将会导致编译失败。
+  lintOnSave: true, // default:true
   // configureWebpack: {
   //   performance: {
   //     hints: 'warning',
-  //     maxEntrypointSize: 50000000, // 入口起点的最大体积
+  //     maxEntrypointSize: 50000000, // 入口起点的最大体积A
   //     // 生成文件的最大体积
   //     maxAssetSize: 30000000,
   //     // 只给出 js 文件的性能提示
