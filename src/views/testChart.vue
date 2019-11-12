@@ -1,6 +1,7 @@
 <template>
   <div class='echarts'>
     <div v-for="(item, index) in dataList" :key="index" :id="'echarts-' + index" style="margin-bottom: 50px;" class="echarts-div"></div>
+    <div :key="index" id="echartsAdaptation" style="margin-bottom: 50px;" class="echarts-div"></div>
   </div>
 </template>
 
@@ -71,10 +72,16 @@ export default {
         let myechart = this.$echarts.init(document.querySelector(`#echarts-${index}`))
         myechart.setOption(item)
       })
+    },
+    AdaptationEcharts () {
+      let myechart = this.$echarts.init(document.querySelector(`#echartsAdaptation`))
+      myechart.setOption(this.dataList[0])
+      window.addEventListener('resize', () => myechart.resize())
     }
   },
   mounted () {
     this.getEcharts()
+    this.AdaptationEcharts()
   }
 }
 </script>
@@ -85,7 +92,7 @@ export default {
   padding-top: 50px;
 }
 .echarts-div {
-  width: 500px;
+  width: 100%;
   height: 400px;
 }
 </style>
