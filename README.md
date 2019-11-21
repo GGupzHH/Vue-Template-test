@@ -50,4 +50,16 @@ npm run buildpublic
 npm run build
 ```
 
+### 引入 commitizen 插件
+
+- git cz
+
+- commit 规范
+
+- npm install -g commitizen
+
+- npm install -g commitizen conventional-changelog conventional-changelog-cli conventional-commits-detector conventional-recommended-bump@0.3.0
+
+- 在 .git 的目录下执行commitizen init cz-conventional-changelog --save --save-exact
+
 > 具体的配置可以查看.env.build .env.buildpublic package.json 文件
