@@ -30,33 +30,36 @@
           }
         </code>
       </div>
+      <div class="wave-btn">
+        <WaveBtn
+          class="wavesbtn"
+          btn_text = "按钮asasdasdasdasdaasdasdsdasd"
+          duration = '.4'
+          wave_bg = '#1395fd'
+          wave_r = '200px'
+        ></WaveBtn>
+      </div>
+      <div>
+        <p>Vuex</p>
+        <span>{{ $store.state.count }}</span>
+        <span>{{ count }}</span>
+        <span>{{ names }}</span>
+        <span @click="addCount(10)">+</span>
+        <span @click="reduceCount(1)">-</span>
+        <span @click="actionsAddCount('异步')">异步</span>
+        <p>getters</p>
+        <!-- getters 相当于计算属性  对state的数据进行二次处理 -->
+        <span>{{ $store.getters.devCount }}</span><br>
+        <!-- getters 二次接收 -->
+        <span>{{ $store.getters.devCount_ }}</span><br>
+        <!-- getters 通过方法访问 -->
+        <span>{{ $store.getters.devCount_fn(2) }}</span><br>
+      </div>
+      <div class="newWaveBtn">
+        <newWaveBtn></newWaveBtn>
+      </div>
     </div>
-    <span></span>
-    <div class="wave-btn">
-      <WaveBtn
-        class="wavesbtn"
-        btn_text = "按钮asasdasdasdasdaasdasdsdasd"
-        duration = '.4'
-        wave_bg = '#1395fd'
-        wave_r = '200px'
-      ></WaveBtn>
-    </div>
-    <div>
-      <p>Vuex</p>
-      <span>{{ $store.state.count }}</span>
-      <span>{{ count }}</span>
-      <span>{{ names }}</span>
-      <span @click="addCount(10)">+</span>
-      <span @click="reduceCount(1)">-</span>
-      <span @click="actionsAddCount('异步')">异步</span>
-      <p>getters</p>
-      <!-- getters 相当于计算属性  对state的数据进行二次处理 -->
-      <span>{{ $store.getters.devCount }}</span><br>
-      <!-- getters 二次接收 -->
-      <span>{{ $store.getters.devCount_ }}</span><br>
-      <!-- getters 通过方法访问 -->
-      <span>{{ $store.getters.devCount_fn(2) }}</span><br>
-    </div>
+    
   </div>
 </template>
 
