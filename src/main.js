@@ -14,6 +14,8 @@ import 'iview/dist/styles/iview.css'
 import echarts from 'echarts'
 // import component
 import Wavebtn from './components/public/WaveBtn/WaveBtn.js'
+// import Normalize.css
+import 'normalize.css'
 
 Vue.use(Wavebtn)
 Vue.use(api)
