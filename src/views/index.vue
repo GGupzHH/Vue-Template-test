@@ -56,7 +56,6 @@
         <span>{{ $store.getters.devCount_fn(2) }}</span><br>
       </div>
       <div class="newWaveBtn">
-        <newWaveBtn></newWaveBtn>
       </div>
     </div>
     

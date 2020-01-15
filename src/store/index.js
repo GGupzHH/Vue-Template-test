@@ -1,23 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import getters from './getters.js'
 Vue.use(Vuex)
 
 // 定义一个变量count
 const state = {
   count: 0
 }
-const getters = {
-  devCount: state => {
-    return state.count + '-----'
-  },
-  devCount_: (state, getters) => {
-    return getters.devCount + '+++'
-  },
-  devCount_fn: (state, getters) => n => {
-    return getters.devCount_ + n
-  }
-}
+
 // 对变量进行操作
 const mutations = {
   addCount (state, n) {
