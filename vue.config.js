@@ -31,6 +31,64 @@ module.exports = {
   //     }
   //   }
   // }
+  // clear console
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
+        'console.log'
+      ]
+    }
+  },
+  chinaWebpack: config => {
+    config.module
+      .rule('images')
+      .test(/\.(gif|png|jpe?g|svg)$/i)
+      .use('image-webpack-loader')
+      .loader('image-webpack-loader')
+      .options(
+        {
+          // https://www.npmjs.com/package/image-webpack-loader
+          // 使用此选项，当使用webpack“调试”模式并且加载程序充当常规文件加载程序时，不会执行任何处理。在开发或使用webpack dev server时，使用此选项可加快初始编译和后续编译（在较小程度上）。正常的构建被正常处理，输出优化的文件。
+          // bypassOnDebug: true,
+          // Same functionality as bypassOnDebug option, but doesn't depend on webpack debug mode, which was deprecated in 2.x. Basically you want to use this option if you're running webpack@2.x or newer.
+          // disable: true,
+          // -------- 上面两个配置项都是老版本的配置 默认值都为false 修改之后图片不会被压缩
+
+          // 压缩png
+          pngquant: {
+            // 品质  0.65-0.9
+            quality: [0.65, 0.90],
+            // 压缩速度
+            speed: 4
+          },
+          // 好像是压缩png详细配置的
+          // optipng: {
+
+          // },
+          // webp
+          webp: {
+            quality: 75
+          },
+          // jpg
+          mozjpeg: {
+            progressive: true,
+            quality: 65
+          },
+          // gif
+          gifsicle: {
+            // 是否开启gif的压缩和渐进式渲染
+            interlaced: false,
+            // 优化级别 1-3
+            optimizationLevel: 3,
+            // 颜色选择
+            colors: 256
+          }
+        }
+      )
+  },
   devServer: {
     overlay: {
       warnings: false,
