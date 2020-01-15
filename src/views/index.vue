@@ -58,14 +58,13 @@
       <div class="newWaveBtn">
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
 // 接收vuex 中的所有对象 解构到mapState   mapState中是vuex中state中保存的数据
 import { mapState } from 'vuex'
-// mapState 相当于局部的去使用vuex中state的数据 
+// mapState 相当于局部的去使用vuex中state的数据
 export default {
   data () {
     return {
