@@ -24,6 +24,10 @@ const constantRoutes = [
     path: '/testChart',
     name: 'testChart',
     component: () => import('../views/testChart.vue')
+  }, {
+    path: '/dragAnddrop',
+    name: 'dragAnddrop',
+    component: () => import('../views/dragAnddrop.vue')
   }
   // {
   //   path: '/about',
