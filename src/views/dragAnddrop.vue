@@ -62,7 +62,9 @@ export default {
       itemUser: {
         name: '',
         age: ''
-      }
+      },
+      beginX: 0,
+      beginY: 0
     }
   },
   components: {},
@@ -74,10 +76,11 @@ export default {
   },
   methods: {
     onMousedown (e, item) {
-      console.log(e)
-      console.log(item)
+      this.$refs.drops.style.transition = 'none'
       this.itemUser = item
       let odiv = e.target
+      this.beginX = e.clientX
+      this.beginY = e.clientY
       let disX = e.clientX - odiv.offsetLeft
       let disY = e.clientY - odiv.offsetTop
       document.onmousemove = e => {
@@ -101,8 +104,15 @@ export default {
       }
     },
     onMouseup () {
-      this.$refs.drops.style.display = 'none'
-      console.log(123)
+      const that = this
+      this.$refs.drops.style.transition = 'all .4s'
+      // 这个事件是监听transition触发完成之后触发的事件
+      this.$refs.drops.addEventListener('transitionend', that.dropTransitioncallback, true)
+      this.$refs.drops.style.left = this.beginX + 'px'
+      this.$refs.drops.style.top = this.beginY + 'px'
+    },
+    dropTransitioncallback (that) {
+      that.target.style.display = 'none'
     }
   },
   mounted () {
