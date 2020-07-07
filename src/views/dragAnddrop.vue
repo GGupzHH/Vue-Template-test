@@ -2,8 +2,18 @@
   <div class='dragAnddrop'>
     <div class="cen-wrapper">
       <div class="sidebar-wrapper">
-        <ul>
-          <li v-for="(item, index) in sideList" :key="index">{{ item }}</li>
+        <ul ref="treeUl">
+          <li
+            v-for="(item, index) in sideList"
+            :key="index"
+            @click="onClick(item)"
+            :style="'background:' + (item.show ? 'rgb(69, 124, 226);' : 'rgb(255, 255, 255)')"
+            :title="item.name"
+          >
+            <div>
+              {{ item.name }}
+            </div>
+          </li>
         </ul>
       </div>
       <div class="list-wrapper">
@@ -33,9 +43,18 @@ export default {
   data () {
     return {
       sideList: [
-        '全部',
-        'test',
-        '信永中和'
+        {
+          name: '全部',
+          show: false
+        },
+        {
+          name: 'test',
+          show: false
+        },
+        {
+          name: '信永中和',
+          show: false
+        }
       ],
       list: [
         {
@@ -59,12 +78,80 @@ export default {
         '姓名',
         '年龄'
       ],
+      listdata: [
+        {
+          type: '全部',
+          child: [
+            {
+              name: '全部张三',
+              age: 122
+            },
+            {
+              name: '全部李四',
+              age: 181
+            },
+            {
+              name: '全部王五',
+              age: 222
+            },
+            {
+              name: '全部赵六',
+              age: 302
+            }
+          ]
+        },
+        {
+          type: 'test',
+          child: [
+            {
+              name: 'test张三',
+              age: 121
+            },
+            {
+              name: 'test李四',
+              age: 118
+            },
+            {
+              name: 'test王五',
+              age: 12
+            },
+            {
+              name: 'test赵六',
+              age: 330
+            }
+          ]
+        },
+        {
+          type: '信永中和',
+          child: [
+            {
+              name: '信永中和张三',
+              age: 132
+            },
+            {
+              name: '信永中和李四',
+              age: 148
+            },
+            {
+              name: '信永中和王五',
+              age: 225
+            },
+            {
+              name: '信永中和赵六',
+              age: 310
+            }
+          ]
+        }
+      ],
       itemUser: {
         name: '',
         age: ''
       },
       beginX: 0,
-      beginY: 0
+      beginY: 0,
+      b_width: 239,
+      b_height: 40,
+      itemUserIndex: null
     }
   },
   components: {},
@@ -88,17 +175,34 @@ export default {
         // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
         let left = e.clientX - disX
         let top = e.clientY - disY
-        // 绑定元素位置到positionX和positionY上面
-        this.positionX = top
-        this.positionY = left
         // 移动当前元素
         this.$refs.drops.style.display = 'flex'
         this.$refs.drops.style.left = left - 55 + 'px'
         this.$refs.drops.style.top = top - 18 + 'px'
-        odiv.style.left = left + 'px'
-        odiv.style.top = top + 'px'
+        for (let i = 0; i < this.$refs.treeUl.children.length; i++) {
+          let offsetLeft = this.$refs.treeUl.children[i].offsetLeft
+          let offsetTop = this.$refs.treeUl.children[i].offsetTop
+          let itemDom = this.$refs.treeUl.children[i]
+
+          if (offsetLeft <= e.clientX && e.clientX <= offsetLeft + this.b_width && offsetTop <= e.clientY && e.clientY <= offsetTop + this.b_height) {
+            itemDom.children[0].style.backgroundColor = '#73a7ff'
+          } else {
+            itemDom.children[0].style.backgroundColor = 'transparent'
+          }
+        }
       }
       document.onmouseup = (e) => {
+        // 如果鼠标在对应的类目下松开  则隐藏那个名片并且处理数据
+        for (let i = 0; i < this.$refs.treeUl.children.length; i++) {
+          let offsetLeft = this.$refs.treeUl.children[i].offsetLeft
+          let offsetTop = this.$refs.treeUl.children[i].offsetTop
+          let itemDom = this.$refs.treeUl.children[i]
+          if (offsetLeft <= e.clientX && e.clientX <= offsetLeft + this.b_width && offsetTop <= e.clientY && e.clientY <= offsetTop + this.b_height) {
+            this.$refs.drops.style.display = 'none'
+            this.$refs.treeUl.children[i].children[0].style.backgroundColor = 'transparent'
+            this.dealWithData(itemDom.getAttribute('title'))
+          }
+        }
         document.onmousemove = null
         document.onmouseup = null
       }
@@ -106,16 +210,52 @@ export default {
     onMouseup () {
       const that = this
       this.$refs.drops.style.transition = 'all .4s'
-      // 这个事件是监听transition触发完成之后触发的事件
+      // 这个事件是监听transition触发完成之后触发的事件 addEventListener 多次重复绑定的时候 如果回调函数是一个匿名函数就会被反复执行 因为匿名函数每一个都是一个独立的函数 所以这里使用具名函数
       this.$refs.drops.addEventListener('transitionend', that.dropTransitioncallback, true)
       this.$refs.drops.style.left = this.beginX + 'px'
-      this.$refs.drops.style.top = this.beginY + 'px'
+      this.$refs.drops.style.top = this.beginY - 20 + 'px'
     },
     dropTransitioncallback (that) {
       that.target.style.display = 'none'
+    },
+    onClick (item) {
+      for (let i = 0; i < this.sideList.length; i++) {
+        if (item.name === this.sideList[i].name) {
+          this.itemUserIndex = i
+          this.sideList[i].show = true
+          this.getListDataItem(item)
+        } else {
+          this.sideList[i].show = false
+        }
+      }
+    },
+    getListDataItem (item) {
+      for (let i = 0; i < this.listdata.length; i++) {
+        if (this.listdata[i].type === item.name) {
+          this.list = this.listdata[i].child
+        }
+      }
+    },
+    dealWithData (typeItem) {
+      if (this.listdata[this.itemUserIndex].type === typeItem) return
+      this.listdata[this.itemUserIndex].child.forEach((item, index) => {
+        // 从原来的地方删除
+        if (item.name === this.itemUser.name) {
+          this.listdata[this.itemUserIndex].child.splice(index, 1)
+        }
+      })
+      this.listdata.forEach(item => {
+        // 将新内容添加
+        if (typeItem === item.type) {
+          item.child.push(this.itemUser)
+        }
+      })
     }
   },
   mounted () {
+    this.$nextTick(() => {
+      this.onClick(this.sideList[0])
+    })
   }
 }
 </script>
@@ -141,16 +281,19 @@ export default {
         li {
           height: 40px;
           line-height: 40px;
-          padding-left: 20px;
           box-sizing: border-box;
           background-color: #fff;
           transition: all .2s;
           color: rgba(0, 0, 0, 0.87);
           font-size: 14px;
+          text-indent: 2rem;
           cursor: pointer;
         }
         li:hover {
           background-color: rgba(237, 239, 243, 0.5);
+        }
+        li.active {
+          background-color: rgb(69, 124, 226);
         }
       }
     }
@@ -222,6 +365,9 @@ export default {
       line-height: 40px;
       font-size: 14px;
       text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     p:first-child {
       font-weight: 600;
