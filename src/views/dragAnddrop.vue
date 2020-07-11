@@ -149,7 +149,7 @@ export default {
       },
       beginX: 0,
       beginY: 0,
-      b_width: 239,
+      b_width: 259,
       b_height: 40,
       itemUserIndex: null
     }
@@ -165,16 +165,16 @@ export default {
     onMousedown (e, item) {
       this.$refs.drops.style.transition = 'none'
       this.itemUser = item
-      let odiv = e.target
+      // let odiv = e.target
       this.beginX = e.clientX
       this.beginY = e.clientY
-      let disX = e.clientX - odiv.offsetLeft
-      let disY = e.clientY - odiv.offsetTop
+      // let disX = e.clientX - odiv.offsetLeft
+      // let disY = e.clientY - odiv.offsetTop
       document.onmousemove = e => {
         // 鼠标按下并移动的事件
         // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-        let left = e.clientX - disX
-        let top = e.clientY - disY
+        let left = e.clientX
+        let top = e.clientY
         // 移动当前元素
         this.$refs.drops.style.display = 'flex'
         this.$refs.drops.style.left = left - 55 + 'px'
@@ -183,8 +183,7 @@ export default {
           let offsetLeft = this.$refs.treeUl.children[i].offsetLeft
           let offsetTop = this.$refs.treeUl.children[i].offsetTop
           let itemDom = this.$refs.treeUl.children[i]
-
-          if (offsetLeft <= e.clientX && e.clientX <= offsetLeft + this.b_width && offsetTop <= e.clientY && e.clientY <= offsetTop + this.b_height) {
+          if (offsetLeft <= left && left <= offsetLeft + this.b_width && offsetTop <= top && top <= offsetTop + this.b_height) {
             itemDom.children[0].style.backgroundColor = '#73a7ff'
           } else {
             itemDom.children[0].style.backgroundColor = 'transparent'
@@ -210,7 +209,7 @@ export default {
     onMouseup () {
       const that = this
       this.$refs.drops.style.transition = 'all .4s'
-      // 这个事件是监听transition触发完成之后触发的事件 addEventListener 多次重复绑定的时候 如果回调函数是一个匿名函数就会被反复执行 因为匿名函数每一个都是一个独立的函数 所以这里使用具名函数
+      // // 这个事件是监听transition触发完成之后触发的事件 addEventListener 多次重复绑定的时候 如果回调函数是一个匿名函数就会被反复执行 因为匿名函数每一个都是一个独立的函数 所以这里使用具名函数
       this.$refs.drops.addEventListener('transitionend', that.dropTransitioncallback, true)
       this.$refs.drops.style.left = this.beginX + 'px'
       this.$refs.drops.style.top = this.beginY - 20 + 'px'
