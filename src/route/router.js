@@ -28,6 +28,10 @@ const constantRoutes = [
     path: '/dragAnddrop',
     name: 'dragAnddrop',
     component: () => import('../views/dragAnddrop.vue')
+  }, {
+    path: '/gridLayout',
+    name: 'gridLayout',
+    component: () => import('../views/gridLayout.vue')
   }
   // {
   //   path: '/about',
