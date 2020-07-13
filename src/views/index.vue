@@ -12,6 +12,7 @@
       <router-link to="/AnchorPoint-2">AnchorPoint-2</router-link>
       <br>
       <router-link to="/testChart">testChart</router-link>
+      <br>
       <router-link to="/dragAnddrop">dragAnddrop</router-link>
     </div>
     <div class="content">
