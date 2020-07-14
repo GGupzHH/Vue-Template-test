@@ -11,7 +11,7 @@
         :vertical-compact="true"
         :margin="[10, 10]"
         :use-css-transforms="true"
-        @layout-mounted="layoutMountedEvent"
+        @layout-ready="layoutReadyEvent"
       >
         <grid-item
           v-for="(item, index) in testLayout"
@@ -22,6 +22,7 @@
           :h="item.h"
           :i="item.i"
           @resize="resizeEvent"
+          @resized="resizedEvent"
         >
           <div class="echarts-wrapper">
             <div class="header-wrapper">
@@ -204,9 +205,17 @@ export default {
   beforeCreate () {},
   created () {},
   methods: {
+    // 正在改变大小的时候适配
     resizeEvent (id, newH, newW, newHPx, newWPx) {
-      console.log(1)
+      this.resizeEcharts(id)
+    },
+    // 改变大小结束之后适配
+    resizedEvent (id, newH, newW, newHPx, newWPx) {
+      this.resizeEcharts(id)
+    },
+    resizeEcharts (id) {
       this.$nextTick(() => {
+        // let echartsDom = document.querySelectorAll('.echarts')
         for (let i = 0; i < this.testLayout.length; i++) {
           if (this.testLayout[i].i === id) {
             this.echartsMember[i].resize()
@@ -214,33 +223,39 @@ export default {
         }
       })
     },
-    layoutMountedEvent () {
-      console.log(1)
+    layoutReadyEvent () {
+      // this.$nextTick(() => {
+      //   for (let i = 0; i < this.echartsMember.length; i++) {
+      //     this.echartsMember[i].resize()
+      //   }
+      // })
     }
   },
   mounted () {
-    console.log(2)
-    this.$nextTick(() => {
-      let echartsDom = document.querySelectorAll('.echarts')
-      for (let i = 0; i < echartsDom.length; i++) {
-        let myechart = this.$echarts.init(echartsDom[i])
-        myechart.setOption(this[echartsDom[i].id])
-        this.echartsMember.push(myechart)
-      }
-    })
+    setTimeout(() => {
+      this.$nextTick(() => {
+        let echartsDom = document.querySelectorAll('.echarts')
+        for (let i = 0; i < echartsDom.length; i++) {
+          let myechart = this.$echarts.init(echartsDom[i])
+          myechart.setOption(this[echartsDom[i].id])
+          this.echartsMember.push(myechart)
+        }
+      })
+    }, 0)
   }
 }
 </script>
 <style lang='less' scoped>
 .gridLayout {
   margin-top: 50px;
-  background-color: #212124;
-  height: 100vh;
+  background-color: #161719;
+  height: calc(100% - 50px);
   .gridLayout-wrapper {
-    background-color: #212124;
+    background-color: #161719;
   }
   /deep/ .vue-grid-item {
     border: 1px solid #141414;
+    background-color: #212124;
     .echarts-wrapper {
       .size(100%, 100%);
       .header-wrapper {
