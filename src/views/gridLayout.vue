@@ -1,34 +1,37 @@
 <template>
   <div class="gridLayout">
-    <!-- https://www.cnblogs.com/whoani/p/11377793.html 具体参数设置 -->
-    <grid-layout
-      :layout="testLayout"
-      :col-num="24"
-      :row-height="30"
-      :is-draggable="true"
-      :is-resizable="true"
-      :vertical-compact="true"
-      :margin="[10, 10]"
-      :use-css-transforms="true"
-    >
-      <grid-item
-        v-for="(item, index) in testLayout"
-        :key="index"
-        :x="item.x"
-        :y="item.y"
-        :w="item.w"
-        :h="item.h"
-        :i="item.i"
-        @resize="resizeEvent"
+    <div class="gridLayout-wrapper">
+      <!-- https://www.cnblogs.com/whoani/p/11377793.html 具体参数设置 -->
+      <grid-layout
+        :layout="testLayout"
+        :col-num="50"
+        :row-height="30"
+        :is-draggable="true"
+        :is-resizable="true"
+        :vertical-compact="true"
+        :margin="[10, 10]"
+        :use-css-transforms="true"
+        @layout-mounted="layoutMountedEvent"
       >
-        <div class="echarts-wrapper">
-          <div class="header-wrapper">
-            <span class="header-cen">{{ item.header }}</span>
+        <grid-item
+          v-for="(item, index) in testLayout"
+          :key="index"
+          :x="item.x"
+          :y="item.y"
+          :w="item.w"
+          :h="item.h"
+          :i="item.i"
+          @resize="resizeEvent"
+        >
+          <div class="echarts-wrapper">
+            <div class="header-wrapper">
+              <span class="header-cen">{{ item.header }}</span>
+            </div>
+            <div class="echarts" :id="item.type"></div>
           </div>
-          <div class="echarts" :id="item.type"></div>
-        </div>
-      </grid-item>
-    </grid-layout>
+        </grid-item>
+      </grid-layout>
+    </div>
   </div>
 </template>
 <script>
@@ -54,37 +57,37 @@ export default {
       // }
       testLayout: [
         {
-          'x': 2,
+          'x': 0,
           'y': 0,
-          'w': 2,
-          'h': 4,
+          'w': 10,
+          'h': 10,
           'i': '1',
           'type': 'zhu',
           header: '这是一个柱状图'
         },
         {
-          'x': 2,
+          'x': 10,
           'y': 0,
-          'w': 2,
-          'h': 4,
+          'w': 12,
+          'h': 10,
           'i': '2',
           'type': 'xian',
           header: '这是一个折线图'
         },
         {
-          'x': 4,
+          'x': 22,
           'y': 0,
-          'w': 2,
-          'h': 5,
+          'w': 8,
+          'h': 8,
           'i': '3',
           'type': 'yuan',
           header: '这是一个饼图'
         },
         {
-          'x': 6,
+          'x': 30,
           'y': 0,
-          'w': 2,
-          'h': 3,
+          'w': 10,
+          'h': 12,
           'i': '4',
           'type': 'zhu',
           header: '这是一个zhuzhuangtu !!!!!!!1'
@@ -202,15 +205,21 @@ export default {
   created () {},
   methods: {
     resizeEvent (id, newH, newW, newHPx, newWPx) {
-      console.log(id, newH, newW, newHPx, newWPx)
-      for (let i = 0; i < this.testLayout.length; i++) {
-        if (this.testLayout[i].i === id) {
-          this.echartsMember[i].resize()
+      console.log(1)
+      this.$nextTick(() => {
+        for (let i = 0; i < this.testLayout.length; i++) {
+          if (this.testLayout[i].i === id) {
+            this.echartsMember[i].resize()
+          }
         }
-      }
+      })
+    },
+    layoutMountedEvent () {
+      console.log(1)
     }
   },
   mounted () {
+    console.log(2)
     this.$nextTick(() => {
       let echartsDom = document.querySelectorAll('.echarts')
       for (let i = 0; i < echartsDom.length; i++) {
@@ -227,8 +236,10 @@ export default {
   margin-top: 50px;
   background-color: #212124;
   height: 100vh;
-  /deep/ .vue-grid-item {
+  .gridLayout-wrapper {
     background-color: #212124;
+  }
+  /deep/ .vue-grid-item {
     border: 1px solid #141414;
     .echarts-wrapper {
       .size(100%, 100%);
@@ -268,6 +279,7 @@ export default {
     box-sizing: border-box;
     box-shadow: 0px 0px 8px 0px #1084ff;
     border: 1px solid #57a3f378;
+    background-color: #1084ff42;
   }
 }
 //@import url(); 引入公共css类
