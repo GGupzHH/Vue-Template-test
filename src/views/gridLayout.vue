@@ -37,6 +37,7 @@
 </template>
 <script>
 import VueGridLayout from 'vue-grid-layout'
+import echarts from 'echarts'
 var GridLayout = VueGridLayout.GridLayout
 var GridItem = VueGridLayout.GridItem
 export default {
@@ -95,31 +96,70 @@ export default {
         }
       ],
       zhu: {
+        title: {
+          text: '折线图堆叠',
+          textStyle: {
+            color: '#fff'
+          }
+        },
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLine: {
+            lineStyle: {
+              color: '#d8d9da',
+              width: 1
+            }
+          }
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#d8d9da',
+              width: 1
+            }
+          }
         },
         series: [{
-          data: [120, 200, 150, 80, 70, 110, 130],
           type: 'bar',
           showBackground: true,
           backgroundStyle: {
             color: 'rgba(220, 220, 220, 0.8)'
-          }
+          },
+          data: [120, {
+        value:52,
+        itemStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+              {
+                offset: 0,
+                color: '#FF9891'
+              }, {
+                offset: 1,
+                color: '#FF3A31'
+              }
+            ])
+          },
+        }
+      }, 150, 80, 70, 110, 130]
         }]
       },
       xian: {
         title: {
-          text: '折线图堆叠'
+          text: '折线图堆叠',
+          textStyle: {
+            color: '#fff'
+          }
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
-          data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+          data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'],
+          textStyle: {
+            color: '#ccc'
+          }
         },
         grid: {
           left: '3%',
@@ -135,10 +175,22 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+          axisLine: {
+            lineStyle: {
+              color: '#d8d9da',
+              width: 1
+            }
+          }
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#d8d9da',
+              width: 1
+            }
+          }
         },
         series: [
           {
@@ -159,7 +211,10 @@ export default {
         title: {
           text: '某站点用户访问来源',
           subtext: '纯属虚构',
-          left: 'center'
+          left: 'center',
+          textStyle: {
+            color: '#fff'
+          }
         },
         tooltip: {
           trigger: 'item',
@@ -295,6 +350,24 @@ export default {
     box-shadow: 0px 0px 8px 0px #1084ff;
     border: 1px solid #57a3f378;
     background-color: #1084ff42;
+  }
+
+  /deep/ .vue-resizable-handle::after {
+    content: "";
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    width: 5px;
+    height: 5px;
+    border-right: 2px solid rgba(0,0,0,.4);
+    border-bottom: 2px solid rgba(0,0,0,.4);
+    transition: all .2s;
+  }
+  /deep/ .vue-grid-item.cssTransforms:hover {
+    .vue-resizable-handle::after {
+      border-right: 2px solid #555;
+      border-bottom: 2px solid #555;
+    }
   }
 }
 //@import url(); 引入公共css类
