@@ -28,7 +28,7 @@
             <div class="header-wrapper">
               <span class="header-cen">{{ item.header }}</span>
             </div>
-            <div class="echarts" :id="item.type"></div>
+            <div class="echarts" :id="item.type" @mousedown="clearMouseDown($event)"></div>
           </div>
         </grid-item>
       </grid-layout>
@@ -74,7 +74,12 @@ export default {
           'h': 10,
           'i': '2',
           'type': 'xian',
-          header: '这是一个折线图'
+          header: '这是一个折线图',
+          echarts: {
+            title: '折线图堆叠',
+            xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series_data: [110, 42, 21, 82, 54, 89, 65]
+          }
         },
         {
           'x': 22,
@@ -83,7 +88,18 @@ export default {
           'h': 8,
           'i': '3',
           'type': 'yuan',
-          header: '这是一个饼图'
+          header: '这是一个饼图',
+          echarts: {
+            title: '折线图堆叠',
+            legend_data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+            series_data: [
+              { value: 335, name: '直接访问' },
+              { value: 310, name: '邮件营销' },
+              { value: 234, name: '联盟广告' },
+              { value: 135, name: '视频广告' },
+              { value: 1548, name: '搜索引擎' }
+            ]
+          }
         },
         {
           'x': 30,
@@ -92,7 +108,12 @@ export default {
           'h': 12,
           'i': '4',
           'type': 'zhu',
-          header: '这是一个zhuzhuangtu !!!!!!!1'
+          header: '这是一个zhuzhuangtu !!!!!!!1',
+          echarts: {
+            title: '折线图堆叠',
+            xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series_data: [110, 42, 21, 82, 54, 89, 65]
+          }
         }
       ],
       zhu: {
@@ -223,7 +244,10 @@ export default {
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+          textStyle: {
+            color: '#ccc'
+          }
         },
         series: [
           {
@@ -248,7 +272,7 @@ export default {
           }
         ]
       },
-      echartsMember: []
+      echartsMember: [],
     }
   },
   components: {
@@ -260,6 +284,17 @@ export default {
   beforeCreate () {},
   created () {},
   methods: {
+    // 添加表格
+    // 1. 图块之间距离  margin
+    // 2. 横向份数
+    // 3. 纵向份数
+    // 4. 图块-宽高-位置
+    // 5. 图块数据
+    clearMouseDown(e) {
+      console.log(123)
+      e.stopPropagation()
+      return false
+    },
     // 正在改变大小的时候适配
     resizeEvent (id, newH, newW, newHPx, newWPx) {
       this.resizeEcharts(id)
