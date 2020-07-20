@@ -1,6 +1,23 @@
 <template>
   <div class="gridLayout">
     <div class="gridLayout-wrapper">
+      <div class="tip-wrapper">
+        <span @click="getDrawer">Add Charts</span>
+      </div>
+      <el-drawer
+        title="定制一个新的图表"
+        :visible.sync="drawer"
+        :direction="direction"
+        :before-close="handleClose">
+        <div class="demo-drawer__content">
+          <el-form :model="form">
+          </el-form>
+        </div>
+        <div class="demo-drawer__footer">
+          <el-button @click="cancelForm">取 消</el-button>
+          <el-button type="primary" @click="successForm">确定</el-button>
+        </div>
+      </el-drawer>
       <!-- https://www.cnblogs.com/whoani/p/11377793.html 具体参数设置 -->
       <grid-layout
         :layout="testLayout"
@@ -57,6 +74,11 @@ export default {
       //   isResizable:true // 单独控制这一个盒子是否可以调整大小 未填写 继承父元素的 非必填
       //   static:false // 这个盒子是静态的  不能被其他元素改变位置 会被覆盖在底部
       // }
+      form: {
+
+      },
+      direction: 'rtl',
+      drawer: false,
       testLayout: [
         {
           'x': 0,
@@ -65,7 +87,12 @@ export default {
           'h': 10,
           'i': '1',
           'type': 'zhu',
-          header: '这是一个柱状图'
+          header: '这是一个柱状图',
+          echarts: {
+            title: '折线图堆叠',
+            xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series_data: [110, 42, 21, 82, 54, 89, 65]
+          }
         },
         {
           'x': 10,
@@ -319,6 +346,18 @@ export default {
       //     this.echartsMember[i].resize()
       //   }
       // })
+    },
+    getDrawer() {
+      this.drawer = true
+    },
+    handleClose() {
+      this.drawer = false
+    },
+    cancelForm() {
+      this.drawer = false
+    },
+    successForm() {
+
     }
   },
   mounted () {
@@ -342,6 +381,30 @@ export default {
   height: calc(100% - 50px);
   .gridLayout-wrapper {
     background-color: #161719;
+    position: relative;
+    overflow: hidden;
+    .tip-wrapper {
+      width: 220px;
+      height: 32px;
+      font-size: 16px;
+      line-height: 2;
+      border-radius: 16px 0px 0px 16px;
+      color: #000;
+      text-align: center;
+      background-color: #fff;
+      position: absolute;
+      right: -200px;
+      top: 50px;
+      transition: all .2s;
+      z-index: 1111;
+      span {
+        cursor: pointer;
+        display: inline-block;
+      }
+    }
+    .tip-wrapper:hover {
+      right: 0px;
+    }
   }
   /deep/ .vue-grid-item {
     border: 1px solid #141414;
@@ -386,7 +449,6 @@ export default {
     border: 1px solid #57a3f378;
     background-color: #1084ff42;
   }
-
   /deep/ .vue-resizable-handle::after {
     content: "";
     position: absolute;
@@ -403,6 +465,25 @@ export default {
       border-right: 2px solid #555;
       border-bottom: 2px solid #555;
     }
+  }
+}
+/deep/ .demo-drawer__content {
+  padding: 10px;
+  height: calc(100% - 60px);
+  display: flex;
+  overflow: auto;
+  form {
+    min-height: 500px;
+    width: 100%;
+    flex: 1;
+  }
+}
+/deep/ .demo-drawer__footer {
+  // margin-top: 32px;
+  display: flex;
+  padding: 10px;
+  button {
+    flex: 1;
   }
 }
 //@import url(); 引入公共css类
