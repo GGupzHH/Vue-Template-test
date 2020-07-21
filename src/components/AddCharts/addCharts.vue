@@ -90,7 +90,17 @@
       :before-close="handleClose">
       <div class="demo-drawer__content">
         <div class="config-charts">
+          <div class="echarts-wrapper">
+            <div class="echarts" id="echarts"></div>
+            <div class="echarts echarts-config-outside">
+              <el-input v-model="echartsName" placeholder="请输入图表名字"></el-input>
+              <el-input v-model="echartsxAxisName" placeholder="请输入横坐标名字"></el-input>
+              <el-input v-model="echartsyAxisName" placeholder="请输入纵坐标名字"></el-input>
+            </div>
+          </div>
+          <div class="echarts-inside">
 
+          </div>
         </div>
       </div>
       <div class="demo-drawer__footer">
@@ -109,6 +119,9 @@ export default {
       form: {},
       direction: 'btt',
       drawer: false,
+      echartsName: '',
+      echartsxAxisName: '',
+      echartsyAxisName: ''
     }
   },
   components: {},
@@ -205,6 +218,21 @@ export default {
     min-height: 500px;
     width: 100%;
     flex: 1;
+    .echarts-wrapper {
+      display: flex;
+      height: 400px;
+      .echarts#echarts {
+        border: 1px solid #000;
+      }
+      .echarts {
+        flex: 1;
+      }
+    }
+    .echarts-inside {
+      width: 100%;
+      height: 400px;
+      border: 1px solid #000;
+    }
   }
 }
 /deep/ .el-drawer__body {
