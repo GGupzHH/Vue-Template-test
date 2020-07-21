@@ -207,6 +207,9 @@ export default {
     flex: 1;
   }
 }
+/deep/ .el-drawer__body {
+  height: calc(100% - 75px);
+}
 /deep/ .demo-drawer__footer {
   // margin-top: 32px;
   width: 50%;
@@ -219,5 +222,6 @@ export default {
 }
 /deep/ .el-dialog__wrapper {
   overflow: hidden;
+  height: 100%;
 }
 </style>
