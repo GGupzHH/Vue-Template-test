@@ -348,7 +348,8 @@ export default {
       // })
     },
     getDrawer() {
-      this.drawer = true
+      this.$router.push('/addCharts')
+      // this.drawer = true
     },
     handleClose() {
       this.drawer = false

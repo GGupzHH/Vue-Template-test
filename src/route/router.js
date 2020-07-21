@@ -32,6 +32,10 @@ const constantRoutes = [
     path: '/gridLayout',
     name: 'gridLayout',
     component: () => import('../views/gridLayout.vue')
+  }, {
+    path: '/addCharts',
+    name: 'addCharts',
+    component: () => import('../components/AddCharts/addCharts.vue')
   }
   // {
   //   path: '/about',
