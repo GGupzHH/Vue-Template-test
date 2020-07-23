@@ -145,7 +145,7 @@ export default {
       ],
       zhu: {
         title: {
-          text: '折线图堆叠',
+          text: '柱状图堆叠',
           textStyle: {
             color: '#fff'
           }
@@ -160,6 +160,12 @@ export default {
             }
           }
         },
+        legend: {
+          data: ['月份'],
+          textStyle: {
+            color: '#ccc'
+          }
+        },
         yAxis: {
           type: 'value',
           axisLine: {
@@ -171,6 +177,7 @@ export default {
         },
         series: [{
           type: 'bar',
+          name: '月份',
           showBackground: true,
           backgroundStyle: {
             color: 'rgba(220, 220, 220, 0.8)'
