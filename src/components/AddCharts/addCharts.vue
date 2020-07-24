@@ -93,18 +93,34 @@
           <div class="echarts-wrapper">
             <div class="echarts" id="echarts"></div>
             <div class="echarts echarts-config-outside">
-              <el-input v-model="echartsName" placeholder="请输入图表名字"></el-input>
-              <el-input v-model="echartsxAxisName" placeholder="请输入横坐标名字"></el-input>
-              <el-input v-model="echartsyAxisName" placeholder="请输入纵坐标名字"></el-input>
+              <div>
+                <label for="title">图标名称: </label>
+                <div name="title">这是一个图标嘛</div>
+                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsName')"></span>
+              </div>
+              <div>
+                <label for="title">横坐标名称: </label>
+                <div name="title">这是横坐标</div>
+                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsxAxisName')"></span>
+              </div>
+              <div>
+                <label for="title">纵坐标名称: </label>
+                <div name="title">这事纵坐标</div>
+                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsyAxisName')"></span>
+              </div>
             </div>
           </div>
           <div class="echarts-inside">
             <v-table
+              is-horizontal-resize
+              style="width:100%; height: 100%;"
               :columns="columns"
+              :height="400"
               :table-data="tableData"
               even-bg-color="#f4f4f4"
               row-hover-color="#eee"
               row-click-color="#edf7ff"
+              :cell-edit-done="cellEditDone"
             ></v-table>
           </div>
         </div>
@@ -114,14 +130,25 @@
         <el-button type="primary" @click="successForm">确定</el-button>
       </div>
     </el-drawer>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%">
+      <el-input v-model="echartsName" placeholder="请输入图表名字"></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { Barchart } from '../../utils/charts'
+import { getBarchartData } from '../../utils/charts'
 export default {
   data () {
     return {
+      dialogVisible: false,
       form: {},
       direction: 'btt',
       drawer: false,
@@ -129,17 +156,22 @@ export default {
       echartsxAxisName: '',
       echartsyAxisName: '',
       tableData: [
-        {"name":"赵伟","tel":"156*****1987","技能":"钢琴、书法、唱歌","address":"上海市黄浦区金陵东路569号17楼"},
-        {"name":"李伟","tel":"182*****1538","技能":"钢琴、书法、唱歌","address":"上海市奉贤区南桥镇立新路12号2楼"},
-        {"name":"孙伟","tel":"161*****0097","技能":"钢琴、书法、唱歌","address":"上海市崇明县城桥镇八一路739号"},
-        {"name":"周伟","tel":"197*****1123","技能":"钢琴、书法、唱歌","address":"上海市青浦区青浦镇章浜路24号"},
-        {"name":"吴伟","tel":"183*****6678","技能":"钢琴、书法、唱歌","address":"上海市松江区乐都西路867-871号"}
+        {"legend": "赵伟", "x1": "110", "x2": "111", "x3": "105", "x4": "110", "x5": "111", "x6": "105", "x7": "105"},
+        {"legend": "李伟", "x1": "110", "x2": "111", "x3": "111", "x4": "110", "x5": "111", "x6": "111", "x7": "111"},
+        {"legend": "孙伟", "x1": "110", "x2": "111", "x3": "123", "x4": "110", "x5": "111", "x6": "123", "x7": "123"},
+        {"legend": "周伟", "x1": "110", "x2": "111", "x3": "132", "x4": "110", "x5": "111", "x6": "132", "x7": "132"},
+        {"legend": "赵伟", "x1": "110", "x2": "111", "x3": "105", "x4": "110", "x5": "111", "x6": "105", "x7": "105"},
+        {"legend": "李伟", "x1": "110", "x2": "111", "x3": "111", "x4": "110", "x5": "111", "x6": "111", "x7": "111"}
       ],
       columns: [
-        {field: 'name', title:'图例', width: 150, titleAlign: 'center',columnAlign:'center', isFrozen: true},
-        {field: 'tel', title: '一月', width: 280, titleAlign: 'center',columnAlign:'center'},
-        {field: '技能', title: '二月', width: 380, titleAlign: 'center',columnAlign:'center'},
-        {field: 'address', title: '三月', width: 430, titleAlign: 'center',columnAlign:'left'}
+        {field: 'legend', title:'图例', width: 150, titleAlign: 'center',columnAlign:'center', isFrozen: true, isEdit: true, isResize: true},
+        {field: 'x1', title: 'Mon', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
+        {field: 'x2', title: 'Tue', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
+        {field: 'x3', title: 'Wed', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
+        {field: 'x4', title: 'Thu', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
+        {field: 'x5', title: 'Fri', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
+        {field: 'x6', title: 'Sat', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
+        {field: 'x7', title: 'Sun', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true}
       ]
     }
   },
@@ -152,37 +184,19 @@ export default {
     
   },
   methods: {
-    chartsChangeTableData(echarts) {
-      const legend = 'legend'
-      let columns = [{
-        field: legend,
-        title: '图例',
-        width: 150,
-        titleAlign: 'center',
-        columnAlign: 'center',
-        isFrozen: true
-      }]
-      let tableData = []
-      for (let i = 0; i < echarts.xAxis.data.length; i++) {
-        columns.push({
-          field: echarts.xAxis.data[i],
-          title: echarts.xAxis.data[i],
-          width: 150,
-          titleAlign: 'center',
-          columnAlign: 'center',
-        })
-      }
-      for (let i = 0; i < Barchart.series.length; i++) {
-        
-      }
-
-      this.columns = columns
-
+    showDialogVisible() {
+      this.dialogVisible = true
+    },
+    chartsChangeTableData() {
+      // console.log(Barchart)
+      getBarchartData(this.tableData, this.columns)
+    },
+    cellEditDone(newValue, oldValue, rowIndex, rowData, field) {
+      this.tableData[rowIndex][field] = newValue;
     },
     getCharts(item) {
-      console.log()
       this.drawer = true
-      this.chartsChangeTableData(Barchart)
+      this.chartsChangeTableData()
     },
     handleClose() {
       this.drawer = false
@@ -286,7 +300,6 @@ export default {
   height: calc(100% - 75px);
 }
 /deep/ .demo-drawer__footer {
-  // margin-top: 32px;
   width: 50%;
   margin: 0 auto;
   display: flex;
@@ -298,5 +311,8 @@ export default {
 /deep/ .el-dialog__wrapper {
   overflow: hidden;
   height: 100%;
+}
+/deep/ .el-drawer__header {
+  margin-bottom: 16px;
 }
 </style>
