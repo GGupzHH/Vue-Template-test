@@ -1,6 +1,6 @@
 export const getBarchartData = (tableData, columns, title, xAxisName, yAxisName) => {
-  console.log(tableData)
   let xAxisData = loadxAxisData(columns)
+  let { legend, series } = loadSeriesData(tableData, columns)
   let options = {
     title: {
       text: title,
@@ -9,7 +9,7 @@ export const getBarchartData = (tableData, columns, title, xAxisName, yAxisName)
       }
     },
     legend: {
-      data: ['月份'],
+      data: legend,
       textStyle: {
         color: '#ccc'
       }
@@ -35,24 +35,28 @@ export const getBarchartData = (tableData, columns, title, xAxisName, yAxisName)
         }
       }
     },
-    series: [{
-      type: 'bar',
-      name: '月份',
-      showBackground: true,
-      backgroundStyle: {
-        color: 'rgba(220, 220, 220, 0.8)'
-      },
-      data: [120, 52, 150, 80, 70, 110, 130]
-    }]
+    series: series
   }
   return options
 }
 
-function loadSeriesData(tableData) {
-  let series
-  let legend
-  for (let val in tableData) {
-
+function loadSeriesData(tableData, columns) {
+  let series = [], legend = [], keyCol = columns[0].field
+  for (let i = 0; i < tableData.length; i++) {
+    let data = []
+    for (let xKey = 1; xKey < columns.length; xKey++) {
+      data.push(tableData[i][columns[xKey].field])
+    }
+    legend.push(tableData[i][keyCol])
+    series.push({
+      type: 'line',
+      name: tableData[i][keyCol],
+      showBackground: true,
+      backgroundStyle: {
+        color: 'rgba(220, 220, 220, 0.8)'
+      },
+      data
+    })
   }
   return { legend, series }
 }

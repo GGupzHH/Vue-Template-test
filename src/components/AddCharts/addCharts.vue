@@ -160,8 +160,6 @@ export default {
         {"legend": "李伟", "x1": "110", "x2": "111", "x3": "111", "x4": "110", "x5": "111", "x6": "111", "x7": "111"},
         {"legend": "孙伟", "x1": "110", "x2": "111", "x3": "123", "x4": "110", "x5": "111", "x6": "123", "x7": "123"},
         {"legend": "周伟", "x1": "110", "x2": "111", "x3": "132", "x4": "110", "x5": "111", "x6": "132", "x7": "132"},
-        {"legend": "赵伟", "x1": "110", "x2": "111", "x3": "105", "x4": "110", "x5": "111", "x6": "105", "x7": "105"},
-        {"legend": "李伟", "x1": "110", "x2": "111", "x3": "111", "x4": "110", "x5": "111", "x6": "111", "x7": "111"}
       ],
       columns: [
         {field: 'legend', title:'图例', width: 150, titleAlign: 'center',columnAlign:'center', isFrozen: true, isEdit: true, isResize: true},
@@ -189,10 +187,12 @@ export default {
     },
     chartsChangeTableData() {
       // console.log(Barchart)
-      getBarchartData(this.tableData, this.columns)
+      let options = getBarchartData(this.tableData, this.columns, this.echartsName, this.echartsxAxisName, this.echartsyAxisName)
+      this.setEcharts(options)
     },
     cellEditDone(newValue, oldValue, rowIndex, rowData, field) {
-      this.tableData[rowIndex][field] = newValue;
+      this.tableData[rowIndex][field] = newValue
+      this.chartsChangeTableData()
     },
     getCharts(item) {
       this.drawer = true
@@ -206,6 +206,14 @@ export default {
     },
     successForm() {
 
+    },
+    setEcharts(options) {
+      this.$nextTick(() => {
+
+        let echartsDom = document.querySelector('#echarts')
+        let myEcharts = this.$echarts.init(echartsDom)
+        myEcharts.setOption(options)
+      })
     }
   },
   mounted () {
