@@ -99,7 +99,7 @@ module.exports = {
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'less',
-      patterns: ['D:\\1-project\\vue-template-test\\Vue-Template-test\\src\\style\\encapsulation.less']
+      patterns: [`${path.join(__dirname, './src/style/encapsulation.less')}`, `D:\\1-project\\vue-template-test\\Vue-Template-test\\src\\style\\encapsulation.less`]
     }
   }
 }
