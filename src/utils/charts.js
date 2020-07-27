@@ -5,7 +5,7 @@ export const getBarchartData = (tableData, columns, title, xAxisName, yAxisName)
     title: {
       text: title,
       textStyle: {
-        color: '#fff'
+        color: '#ccc'
       }
     },
     legend: {

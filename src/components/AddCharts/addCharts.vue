@@ -93,20 +93,20 @@
           <div class="echarts-wrapper">
             <div class="echarts" id="echarts"></div>
             <div class="echarts echarts-config-outside">
-              <div>
-                <label for="title">图标名称: </label>
-                <div name="title">这是一个图标嘛</div>
-                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsName')"></span>
+              <div class="clearfix">
+                <label for="title" class="left">图表名称：</label>
+                <div name="title" class="left title">{{ echartsName }}</div>
+                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsName', '请输入图表名称', '图表名称')"></span>
               </div>
-              <div>
-                <label for="title">横坐标名称: </label>
-                <div name="title">这是横坐标</div>
-                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsxAxisName')"></span>
+              <div class="clearfix">
+                <label for="title" class="left">横坐标名称（单位）：</label>
+                <div name="title" class="left title">{{ echartsxAxisName }}</div>
+                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsxAxisName', '请输入横坐标名称（单位）', '横坐标名称（单位）')"></span>
               </div>
-              <div>
-                <label for="title">纵坐标名称: </label>
-                <div name="title">这事纵坐标</div>
-                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsyAxisName')"></span>
+              <div class="clearfix">
+                <label for="title" class="left">纵坐标名称（单位）：</label>
+                <div name="title" class="left title">{{ echartsyAxisName }}</div>
+                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsyAxisName', '请输入纵坐标名称（单位）', '纵坐标名称（单位）')"></span>
               </div>
             </div>
           </div>
@@ -131,13 +131,13 @@
       </div>
     </el-drawer>
     <el-dialog
-      title="提示"
+      :title="dialogTitle"
       :visible.sync="dialogVisible"
       width="30%">
-      <el-input v-model="echartsName" placeholder="请输入图表名字"></el-input>
+      <el-input v-model="echartsData" :placeholder="placeholder"></el-input>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="setCharts">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -152,9 +152,9 @@ export default {
       form: {},
       direction: 'btt',
       drawer: false,
-      echartsName: '',
-      echartsxAxisName: '',
-      echartsyAxisName: '',
+      echartsName: '这是一个图标嘛',
+      echartsxAxisName: '这是横坐标',
+      echartsyAxisName: '这事纵坐标',
       tableData: [
         {"legend": "赵伟", "x1": "110", "x2": "111", "x3": "105", "x4": "110", "x5": "111", "x6": "105", "x7": "105"},
         {"legend": "李伟", "x1": "110", "x2": "111", "x3": "111", "x4": "110", "x5": "111", "x6": "111", "x7": "111"},
@@ -170,7 +170,11 @@ export default {
         {field: 'x5', title: 'Fri', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
         {field: 'x6', title: 'Sat', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
         {field: 'x7', title: 'Sun', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true}
-      ]
+      ],
+      echartsData: '',
+      placeholder: '',
+      dialogTitle: '',
+      chartsType: ''
     }
   },
   components: {},
@@ -182,8 +186,17 @@ export default {
     
   },
   methods: {
-    showDialogVisible() {
+    setCharts() {
+      this[this.chartsType] = this.echartsData
+      this.chartsChangeTableData()
+      this.dialogVisible = false
+    },
+    showDialogVisible(type, p_text, title) {
       this.dialogVisible = true
+      this.chartsType = type
+      this.placeholder = p_text
+      this.dialogTitle = title
+      this.echartsData = this[type]
     },
     chartsChangeTableData() {
       // console.log(Barchart)
@@ -209,7 +222,6 @@ export default {
     },
     setEcharts(options) {
       this.$nextTick(() => {
-
         let echartsDom = document.querySelector('#echarts')
         let myEcharts = this.$echarts.init(echartsDom)
         myEcharts.setOption(options)
@@ -279,7 +291,7 @@ export default {
   }
 }
 /deep/ .demo-drawer__content {
-  padding: 10px;
+  padding: 16px;
   height: calc(100% - 60px);
   display: flex;
   overflow: auto;
@@ -292,9 +304,36 @@ export default {
       height: 400px;
       .echarts#echarts {
         border: 1px solid #000;
+        margin-right: 8px;
       }
       .echarts {
         flex: 1;
+      }
+      .echarts-config-outside {
+        margin-left: 8px;
+      }
+      .echarts-config-outside > div {
+        height: 50px;
+        line-height: 50px;
+        font-size: 14px;
+        label {
+          padding-left: 16px;
+          color: #ababab;
+        }
+        div.title {
+          color: #676767;
+        }
+        span {
+          float: right;
+          font-size: 16px;
+          line-height: 50px;
+          padding-right: 16px;
+          color: #6f6f6fcc;
+          cursor: pointer;
+        }
+        span:hover {
+          color: #000;
+        }
       }
     }
     .echarts-inside {
