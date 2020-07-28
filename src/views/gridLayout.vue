@@ -19,7 +19,7 @@
         </div>
       </el-drawer>
       <!-- https://www.cnblogs.com/whoani/p/11377793.html 具体参数设置 -->
-      <grid-layout
+      <grid-layout 
         :layout="testLayout"
         :col-num="50"
         :row-height="30"
@@ -366,19 +366,48 @@ export default {
     },
     successForm() {
 
+    },
+    loadAllEcharts() {
+      let echartsDom = document.querySelectorAll('.echarts')
+      for (let i = 0; i < echartsDom.length; i++) {
+        let myechart = this.$echarts.init(echartsDom[i])
+        myechart.setOption(this[echartsDom[i].id])
+        this.echartsMember.push(myechart)
+      }
+    },
+    loadSingleEcharts() {
+      let echartsDom = document.querySelectorAll('.echarts')
+      let i = echartsDom.length - 1
+      let myechart = this.$echarts.init(echartsDom[i])
+      myechart.setOption(this[echartsDom[i].id])
+      this.echartsMember.push(myechart)
     }
   },
   mounted () {
     setTimeout(() => {
       this.$nextTick(() => {
-        let echartsDom = document.querySelectorAll('.echarts')
-        for (let i = 0; i < echartsDom.length; i++) {
-          let myechart = this.$echarts.init(echartsDom[i])
-          myechart.setOption(this[echartsDom[i].id])
-          this.echartsMember.push(myechart)
-        }
+        this.loadAllEcharts()
       })
     }, 0)
+    setTimeout(() => {
+      this.testLayout.push({
+          'x': 0,
+          'y': 0,
+          'w': 10,
+          'h': 10,
+          'i': '12',
+          'type': 'zhu',
+          header: '这是一个柱状图',
+          echarts: {
+            title: '折线图堆叠',
+            xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series_data: [110, 42, 21, 82, 54, 89, 65]
+          }
+        })
+        this.$nextTick(() => {
+          this.loadSingleEcharts()
+        })
+    }, 5000);
   }
 }
 </script>
