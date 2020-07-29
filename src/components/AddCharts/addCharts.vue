@@ -144,7 +144,7 @@
 </template>
 
 <script>
-import { getBarchartData } from '../../utils/charts'
+import { getBarchartData } from '../../utils/load_table_charts'
 export default {
   data () {
     return {
@@ -218,7 +218,7 @@ export default {
       this.drawer = false
     },
     successForm() {
-
+      console.log()
     },
     setEcharts(options) {
       this.$nextTick(() => {

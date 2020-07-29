@@ -55,6 +55,7 @@
 <script>
 import VueGridLayout from 'vue-grid-layout'
 import echarts from 'echarts'
+import { getBarChartData, getLineChartData, getCircularChartData } from '../utils/load_api_charts'
 var GridLayout = VueGridLayout.GridLayout
 var GridItem = VueGridLayout.GridItem
 export default {
@@ -89,9 +90,18 @@ export default {
           'type': 'zhu',
           header: '这是一个柱状图',
           echarts: {
-            title: '折线图堆叠',
+            title: '折线图',
             xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            series_data: [110, 42, 21, 82, 54, 89, 65]
+            legend_data: ['2011年', '2012年'],
+            series_data: [
+              {
+                name: '2011年',
+                data: [110, 42, 21, 82, 54, 89, 65]
+              }, {
+                name: '2012年',
+                data: [113, 12, 51, 32, 74, 19, 35]
+              }
+            ]
           }
         },
         {
@@ -104,8 +114,17 @@ export default {
           header: '这是一个折线图',
           echarts: {
             title: '折线图堆叠',
+            legend_data: ['邮件营销', '联盟广告'],
             xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            series_data: [110, 42, 21, 82, 54, 89, 65]
+            series_data: [
+              {
+                name: '邮件营销',
+                data: [120, 132, 101, 134, 90, 230, 210]
+              }, {
+                name: '联盟广告',
+                data: [220, 182, 191, 234, 290, 330, 310]
+              }
+            ]
           }
         },
         {
@@ -137,9 +156,18 @@ export default {
           'type': 'zhu',
           header: '这是一个zhuzhuangtu !!!!!!!1',
           echarts: {
-            title: '折线图堆叠',
+            title: '折线图',
             xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            series_data: [110, 42, 21, 82, 54, 89, 65]
+            legend_data: ['2011年', '2012年'],
+            series_data: [
+              {
+                name: '2011年',
+                data: [110, 42, 21, 82, 54, 89, 65]
+              }, {
+                name: '2012年',
+                data: [113, 12, 51, 32, 74, 19, 35]
+              }
+            ]
           }
         }
       ],
@@ -331,17 +359,26 @@ export default {
     },
     // 正在改变大小的时候适配
     resizeEvent (id, newH, newW, newHPx, newWPx) {
-      this.resizeEcharts(id)
+      this.resizeSingleEcharts(id)
     },
     // 改变大小结束之后适配
     resizedEvent (id, newH, newW, newHPx, newWPx) {
-      this.resizeEcharts(id)
+      this.resizeSingleEcharts(id)
     },
-    resizeEcharts (id) {
+    resizeSingleEcharts (id) {
       this.$nextTick(() => {
         // let echartsDom = document.querySelectorAll('.echarts')
         for (let i = 0; i < this.testLayout.length; i++) {
           if (this.testLayout[i].i === id) {
+            this.echartsMember[i].resize()
+          }
+        }
+      })
+    },
+    resizeAllEcharts() {
+      this.$nextTick(() => {
+        window.onresize = () => {
+          for (let i = 0; i < this.testLayout.length; i++) {
             this.echartsMember[i].resize()
           }
         }
@@ -371,8 +408,17 @@ export default {
       let echartsDom = document.querySelectorAll('.echarts')
       for (let i = 0; i < echartsDom.length; i++) {
         let myechart = this.$echarts.init(echartsDom[i])
-        myechart.setOption(this[echartsDom[i].id])
+        let options = null
+        if (echartsDom[i].id === 'zhu') {
+          options = getBarChartData(this.testLayout[i].echarts)
+        } else if (echartsDom[i].id === 'xian') {
+          options = getLineChartData(this.testLayout[i].echarts)
+        } else if (echartsDom[i].id === 'yuan') {
+          options = getCircularChartData(this.testLayout[i].echarts)
+        }
+        myechart.setOption(options)
         this.echartsMember.push(myechart)
+        this.resizeAllEcharts()
       }
     },
     loadSingleEcharts() {
