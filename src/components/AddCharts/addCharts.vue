@@ -174,7 +174,8 @@ export default {
       echartsData: '',
       placeholder: '',
       dialogTitle: '',
-      chartsType: ''
+      chartsType: '',
+      options: null
     }
   },
   components: {},
@@ -218,12 +219,65 @@ export default {
       this.drawer = false
     },
     successForm() {
-      console.log()
+      console.log(this.options)
+      let series_data = []
+      for (let i = 0; i < this.options.series.length; i++) {
+        series_data.push({
+          name: this.options.series[i].name,
+          data: this.options.series[i].data
+        })
+      }
+      let grid_data = {
+        'x': 0,
+        'y': 0,
+        'w': 10,
+        'h': 12,
+        'i': Math.random(),
+        'type': 'xian',
+        header: this.options.title.text,
+        echarts: {
+          title: this.options.title.text,
+          xAxis_data: this.options.xAxis.data,
+          legend_data: this.options.legend.data,
+          series_data
+        }
+      }
+      console.log(grid_data)
+      this.$router.push({
+        name: 'gridLayout',
+        params: {
+          data: grid_data
+        }
+      })
+      // {
+      //   'x': 30,
+      //   'y': 0,
+      //   'w': 10,
+      //   'h': 12,
+      //   'i': '4',
+      //   'type': 'zhu',
+      //   header: '这是一个zhuzhuangtu !!!!!!!1',
+      //   echarts: {
+      //     title: '折线图',
+      //     xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      //     legend_data: ['2011年', '2012年'],
+      //     series_data: [
+      //       {
+      //         name: '2011年',
+      //         data: [110, 42, 21, 82, 54, 89, 65]
+      //       }, {
+      //         name: '2012年',
+      //         data: [113, 12, 51, 32, 74, 19, 35]
+      //       }
+      //     ]
+      //   }
+      // }
     },
     setEcharts(options) {
       this.$nextTick(() => {
         let echartsDom = document.querySelector('#echarts')
         let myEcharts = this.$echarts.init(echartsDom)
+        this.options = options
         myEcharts.setOption(options)
       })
     }

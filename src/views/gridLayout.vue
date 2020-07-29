@@ -342,7 +342,6 @@ export default {
     GridItem
   },
   computed: {},
-  watch: {},
   beforeCreate () {},
   created () {},
   methods: {
@@ -408,14 +407,7 @@ export default {
       let echartsDom = document.querySelectorAll('.echarts')
       for (let i = 0; i < echartsDom.length; i++) {
         let myechart = this.$echarts.init(echartsDom[i])
-        let options = null
-        if (echartsDom[i].id === 'zhu') {
-          options = getBarChartData(this.testLayout[i].echarts)
-        } else if (echartsDom[i].id === 'xian') {
-          options = getLineChartData(this.testLayout[i].echarts)
-        } else if (echartsDom[i].id === 'yuan') {
-          options = getCircularChartData(this.testLayout[i].echarts)
-        }
+        let options = this.loadOptions(i, echartsDom)
         myechart.setOption(options)
         this.echartsMember.push(myechart)
         this.resizeAllEcharts()
@@ -425,35 +417,53 @@ export default {
       let echartsDom = document.querySelectorAll('.echarts')
       let i = echartsDom.length - 1
       let myechart = this.$echarts.init(echartsDom[i])
-      myechart.setOption(this[echartsDom[i].id])
+      myechart.setOption(this.loadOptions(i, echartsDom))
       this.echartsMember.push(myechart)
+    },
+    loadOptions(i, echartsDom) {
+      let options = null
+      if (echartsDom[i].id === 'zhu') {
+        options = getBarChartData(this.testLayout[i].echarts)
+      } else if (echartsDom[i].id === 'xian') {
+        options = getLineChartData(this.testLayout[i].echarts)
+      } else if (echartsDom[i].id === 'yuan') {
+        options = getCircularChartData(this.testLayout[i].echarts)
+      }
+      return options
     }
   },
   mounted () {
     setTimeout(() => {
       this.$nextTick(() => {
         this.loadAllEcharts()
+        console.log(this.$route.params.data)
+        if (this.$route.params.data) {
+          this.testLayout.push(this.$route.params.data)
+          this.$nextTick(() => {
+            this.loadSingleEcharts()
+          })
+        }
       })
     }, 0)
-    setTimeout(() => {
-      this.testLayout.push({
-          'x': 0,
-          'y': 0,
-          'w': 10,
-          'h': 10,
-          'i': '12',
-          'type': 'zhu',
-          header: '这是一个柱状图',
-          echarts: {
-            title: '折线图堆叠',
-            xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            series_data: [110, 42, 21, 82, 54, 89, 65]
-          }
-        })
-        this.$nextTick(() => {
-          this.loadSingleEcharts()
-        })
-    }, 5000);
+    // setTimeout(() => {
+    //   this.testLayout.push({
+    //       'x': 0,
+    //       'y': 0,
+    //       'w': 10,
+    //       'h': 10,
+    //       'i': '12',
+    //       'type': 'zhu',
+    //       header: '这是一个柱状图',
+    //       echarts: {
+    //         title: '折线图堆叠',
+    //         xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    //         series_data: [110, 42, 21, 82, 54, 89, 65]
+    //       }
+    //     })
+    //     this.$nextTick(() => {
+    //       this.loadSingleEcharts()
+    //     })
+    // }, 5000);
   }
 }
 </script>
