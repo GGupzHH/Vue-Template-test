@@ -108,6 +108,11 @@
                 <div name="title" class="left title">{{ echartsyAxisName }}</div>
                 <span class="el-icon-edit-outline" @click="showDialogVisible('echartsyAxisName', '请输入纵坐标名称（单位）', '纵坐标名称（单位）')"></span>
               </div>
+              <div class="clearfix">
+                <label for="title" class="left"></label>
+                <div name="title" class="left title">{{ echartsyAxisName }}</div>
+                <span class="el-icon-edit-outline" @click="showDialogVisible('echartsyAxisName', '请输入纵坐标名称（单位）', '纵坐标名称（单位）')"></span>
+              </div>
             </div>
           </div>
           <div class="echarts-inside">
@@ -156,10 +161,11 @@ export default {
       echartsxAxisName: '这是横坐标',
       echartsyAxisName: '这事纵坐标',
       tableData: [
-        {"legend": "赵伟", "x1": "110", "x2": "111", "x3": "105", "x4": "110", "x5": "111", "x6": "105", "x7": "105"},
-        {"legend": "李伟", "x1": "110", "x2": "111", "x3": "111", "x4": "110", "x5": "111", "x6": "111", "x7": "111"},
-        {"legend": "孙伟", "x1": "110", "x2": "111", "x3": "123", "x4": "110", "x5": "111", "x6": "123", "x7": "123"},
-        {"legend": "周伟", "x1": "110", "x2": "111", "x3": "132", "x4": "110", "x5": "111", "x6": "132", "x7": "132"},
+        {"legend": "图例", "x1": "Mon", "x2": "Tue", "x3": "Wed", "x4": "Thu", "x5": "Fri", "x6": "Sat", "x7": "Sun"},
+        {"legend": "赵伟", "x1": "120", "x2": "121", "x3": "105", "x4": "112", "x5": "121", "x6": "105", "x7": "105"},
+        {"legend": "李伟", "x1": "102", "x2": "111", "x3": "111", "x4": "121", "x5": "141", "x6": "111", "x7": "111"},
+        {"legend": "孙伟", "x1": "130", "x2": "131", "x3": "123", "x4": "141", "x5": "151", "x6": "123", "x7": "123"},
+        {"legend": "周伟", "x1": "111", "x2": "141", "x3": "132", "x4": "131", "x5": "111", "x6": "132", "x7": "132"},
       ],
       columns: [
         {field: 'legend', title:'图例', width: 150, titleAlign: 'center',columnAlign:'center', isFrozen: true, isEdit: true, isResize: true},
@@ -280,6 +286,12 @@ export default {
         this.options = options
         myEcharts.setOption(options)
       })
+    },
+    addRow() {
+
+    },
+    addCol() {
+
     }
   },
   mounted () {
@@ -415,5 +427,8 @@ export default {
 }
 /deep/ .el-drawer__header {
   margin-bottom: 16px;
+}
+/deep/ .v-table-header {
+  display: none;
 }
 </style>
