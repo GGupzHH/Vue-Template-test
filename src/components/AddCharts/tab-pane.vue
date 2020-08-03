@@ -11,7 +11,7 @@
             <p>柱状堆叠图</p>
             <img src="https://echarts-www.cdn.bcebos.com/examples/data/thumb/bar-y-category-stack.jpg?_v_=20200710_1" alt="">
           </div>
-          <div class="charts-item">
+          <div class="charts-item" @click="getBaseBar">
             <p>多条目柱状图</p>
             <img src="https://echarts-www.cdn.bcebos.com/examples/data/thumb/dataset-simple0.jpg?_v_=20200710_1" alt="">
           </div>
@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     getBaseBar() {
-      this.$emit('getBaseBar')
+      this.$emit('getBaseBar', 'barChart')
     }
   },
   mounted () {

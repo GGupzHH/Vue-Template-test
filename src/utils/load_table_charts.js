@@ -49,7 +49,7 @@ function loadSeriesData(tableData, columns) {
     }
     legend.push(tableData[i][keyCol])
     series.push({
-      type: 'line',
+      type: 'bar',
       name: tableData[i][keyCol],
       showBackground: true,
       backgroundStyle: {
