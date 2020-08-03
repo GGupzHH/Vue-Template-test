@@ -135,6 +135,12 @@ export default {
     addCol() {
 
     },
+    delRow() {
+
+    },
+    delCol() {
+
+    },
     laodApiData() {
       let series_data = []
       for (let i = 0; i < this.options.series.length; i++) {
