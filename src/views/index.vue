@@ -16,6 +16,8 @@
       <router-link to="/dragAnddrop">dragAnddrop</router-link>
       <br>
       <router-link to="/gridLayout">gridLayout</router-link>
+      <br>
+      <router-link to="/copyDemo">copyDemo</router-link>
     </div>
     <div class="content">
       <div v-cloak>

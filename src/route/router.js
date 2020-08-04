@@ -36,6 +36,10 @@ const constantRoutes = [
     path: '/addCharts',
     name: 'addCharts',
     component: () => import('../components/AddCharts/addCharts.vue')
+  }, {
+    path: '/copyDemo',
+    name: 'copyDemo',
+    component: () => import('../views/Copydemo.vue')
   }
   // {
   //   path: '/about',
