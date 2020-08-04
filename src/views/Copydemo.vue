@@ -29,7 +29,9 @@ export default {
       input.value = val
       console.log(input.value)
       document.body.appendChild(input)
+      // 获取焦点
       input.focus()
+      // 选中指定内容
       input.setSelectionRange(0, val.length)
       if (document.execCommand('copy')) {
         document.execCommand('copy')
