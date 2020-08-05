@@ -155,7 +155,7 @@ export default {
         'w': 10,
         'h': 12,
         'i': Math.random(),
-        'type': 'xian',
+        'type': 'zhu',
         header: this.options.title.text,
         echarts: {
           title: this.options.title.text,
