@@ -11,8 +11,8 @@
       size="100%"
       :before-close="handleClose">
       <div class="demo-drawer__content">
-        <Bar-chart ref="barChart">
-        </Bar-chart>
+        <Bar-chart ref="barChart" v-if="chartsID === 'barChart'"></Bar-chart>
+        <Bar-or-chart ref="barOrChart" v-if="chartsID === 'barOrChart'"></Bar-or-chart>
       </div>
       <div class="demo-drawer__footer">
         <el-button @click="cancelForm">取 消</el-button>
@@ -25,6 +25,7 @@
 <script>
 import { getBarchartData } from '../../utils/load_table_charts'
 import BarChart from '../charts/BarChear/BarChart.vue'
+import BarOrChart from '../charts/BarChear/BarOrChart.vue'
 import tabPane from './tab-pane.vue'
 export default {
   data () {
@@ -36,10 +37,9 @@ export default {
   },
   components: {
     tabPane,
-    BarChart
+    BarChart,
+    BarOrChart
   },
-  computed: {},
-  watch: {},
   beforeCreate () {
   },
   created () {

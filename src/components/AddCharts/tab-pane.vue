@@ -3,7 +3,7 @@
     <el-tabs type="border-card">
       <el-tab-pane label="柱状图">
         <div class="charts-wrapper">
-          <div class="charts-item" @click="getBaseBar">
+          <div class="charts-item" @click="getBaseBar('barChart')">
             <p>简易柱状图</p>
             <img src="https://echarts-www.cdn.bcebos.com/examples/data/thumb/bar-background.jpg?_v_=20200710_1" alt="">
           </div>
@@ -11,7 +11,7 @@
             <p>柱状堆叠图</p>
             <img src="https://echarts-www.cdn.bcebos.com/examples/data/thumb/bar-y-category-stack.jpg?_v_=20200710_1" alt="">
           </div>
-          <div class="charts-item" @click="getBaseBar">
+          <div class="charts-item" @click="getBaseBar('barOrChart')">
             <p>多条目柱状图</p>
             <img src="https://echarts-www.cdn.bcebos.com/examples/data/thumb/dataset-simple0.jpg?_v_=20200710_1" alt="">
           </div>
@@ -101,8 +101,8 @@ export default {
   created () {
   },
   methods: {
-    getBaseBar() {
-      this.$emit('getBaseBar', 'barChart')
+    getBaseBar(type) {
+      this.$emit('getBaseBar', type)
     }
   },
   mounted () {
