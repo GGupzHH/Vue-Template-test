@@ -9,9 +9,9 @@ function copy () {
   let input = document.createElement('input')
   input.value = this.value
   document.body.appendChild(input)
-  // // 获取焦点
+  // 获取焦点
   input.focus()
-  // // 选中指定内容
+  // 选中指定内容
   input.setSelectionRange(0, this.value.length)
   if (document.execCommand('copy')) {
     document.execCommand('copy')
