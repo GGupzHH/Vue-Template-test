@@ -90,7 +90,7 @@
 export default {
   data () {
     return {
-      
+
     }
   },
   components: {},
@@ -101,7 +101,7 @@ export default {
   created () {
   },
   methods: {
-    getBaseBar(type) {
+    getBaseBar (type) {
       this.$emit('getBaseBar', type)
     }
   },

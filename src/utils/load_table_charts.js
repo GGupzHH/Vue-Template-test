@@ -40,8 +40,8 @@ export const getBarchartData = (tableData, columns, title, xAxisName, yAxisName)
   return options
 }
 
-function loadSeriesData(tableData, columns) {
-  let series = [], legend = [], keyCol = columns[0].field
+function loadSeriesData (tableData, columns) {
+  let series = []; let legend = []; let keyCol = columns[0].field
   for (let i = 1; i < tableData.length; i++) {
     let data = []
     for (let xKey = 1; xKey < columns.length; xKey++) {
@@ -61,7 +61,7 @@ function loadSeriesData(tableData, columns) {
   return { legend, series }
 }
 
-function loadxAxisData(tableData, columns) {
+function loadxAxisData (tableData, columns) {
   let xAxis = []
   for (let xKey = 1; xKey < columns.length; xKey++) {
     xAxis.push(tableData[0][columns[xKey].field])

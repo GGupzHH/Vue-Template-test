@@ -1,6 +1,6 @@
 <template>
   <div class='addCharts'>
-    <tab-pane 
+    <tab-pane
       @getBaseBar="getCharts"
     >
     </tab-pane>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getBarchartData } from '../../utils/load_table_charts'
+// import { getBarchartData } from '../../utils/load_table_charts'
 import BarChart from '../charts/BarChear/BarChart.vue'
 import BarOrChart from '../charts/BarChear/BarOrChart.vue'
 import tabPane from './tab-pane.vue'
@@ -43,20 +43,20 @@ export default {
   beforeCreate () {
   },
   created () {
-    
+
   },
   methods: {
-    getCharts(item) {
+    getCharts (item) {
       this.chartsID = item
       this.drawer = true
     },
-    handleClose() {
+    handleClose () {
       this.drawer = false
     },
-    cancelForm() {
+    cancelForm () {
       this.drawer = false
     },
-    successForm() {
+    successForm () {
       this.$router.push({
         name: 'gridLayout',
         params: {

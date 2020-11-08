@@ -44,7 +44,7 @@
 <script>
 
 export default {
-  data() {
+  data () {
     return {
       aside_list: [{
         name: '按钮1',
@@ -86,20 +86,20 @@ export default {
       }
     },
     getActive (index) {
-      let newAside_list = this.aside_list.map(this.mapFn)
-      newAside_list[index].active = 1
-      this.aside_list = newAside_list
+      let newAsideList = this.aside_list.map(this.mapFn)
+      newAsideList[index].active = 1
+      this.aside_list = newAsideList
     },
     //  需要改成防抖
     throttle (fn) {
-      let on_off = true
+      let onOff = true
       let that = this
       return function () {
-        if (!on_off) return
-        on_off = false
+        if (!onOff) return
+        onOff = false
         setTimeout(() => {
           that.onScroll()
-          on_off = true
+          onOff = true
         }, 500)
       }
     },
@@ -110,7 +110,7 @@ export default {
       // console.log(e)
       let boxChildAll = document.querySelectorAll('.box-child')
       // console.log(boxChildAll)
-      let minTop = boxChildAll[boxChildAll.length - 1].getBoundingClientRect().top
+      // let minTop = boxChildAll[boxChildAll.length - 1].getBoundingClientRect().top
       let activeItem = 0
       // console.log(minTop)
       for (let i = 0; i < boxChildAll.length; i++) {
@@ -137,7 +137,7 @@ export default {
       this.getActive(activeItem)
     }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       // window.addEventListener('scroll', this.throttle(this.onScroll))
       window.addEventListener('scroll', this.onScroll)
