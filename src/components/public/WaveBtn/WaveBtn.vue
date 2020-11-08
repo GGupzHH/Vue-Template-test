@@ -20,12 +20,12 @@ export default {
     wave_r: String
   },
   methods: {
-    wavesEffect(e) {
+    wavesEffect (e) {
       if (isNaN(this.duration * 1000)) {
         console.error('duration the number of seconds required to carry no units')
       }
       e.target.style.lineHeight = e.target.offsetHeight + 'px'
-      e = e || window.event;
+      e = e || window.event
       let c = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
       this.$refs.wavesbtn.appendChild(c)
       c.setAttribute('cx', e.offsetX)
@@ -36,18 +36,18 @@ export default {
         c.style = `
         transition-duration: ${this.duration}s;
         transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        opacity:0;`;
+        opacity:0;`
         c.setAttribute('r', this.wave_r)
         setTimeout(() => {
-          this.$refs.wavesbtn.removeChild(c);
-        }, this.duration * 1000);
-      }, 100);
+          this.$refs.wavesbtn.removeChild(c)
+        }, this.duration * 1000)
+      }, 100)
     }
   },
-  mounted() {
-    let btn_line = document.querySelector('.btn_text')
-    btn_line.style.lineHeight = btn_line.offsetHeight + 'px'
-  },
+  mounted () {
+    let btnLine = document.querySelector('.btn_text')
+    btnLine.style.lineHeight = btnLine.offsetHeight + 'px'
+  }
 }
 </script>
 <style scoped lang="less">

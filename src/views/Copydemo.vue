@@ -12,7 +12,7 @@
 export default {
   data () {
     return {
-      
+
     }
   },
   components: {},
@@ -23,7 +23,7 @@ export default {
   created () {
   },
   methods: {
-    onCopy() {
+    onCopy () {
       let val = this.$refs.url.textContent
       let input = document.createElement('input')
       input.value = val
@@ -37,7 +37,7 @@ export default {
         document.execCommand('copy')
         console.log('复制成功')
       }
-      document.body.removeChild(input);
+      document.body.removeChild(input)
     }
   },
   mounted () {

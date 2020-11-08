@@ -126,17 +126,17 @@ export const getCircularChartData = (data) => {
   }
 }
 
-function loadSeriesData(series_data, type) {
+function loadSeriesData (seriesData, type) {
   let series = []
-  for (let i = 0; i < series_data.length; i++) {
+  for (let i = 0; i < seriesData.length; i++) {
     series.push({
       type: type,
-      name: series_data[i].name,
+      name: seriesData[i].name,
       showBackground: true,
       backgroundStyle: {
         color: 'rgba(220, 220, 220, 0.8)'
       },
-      data: series_data[i].data
+      data: seriesData[i].data
     })
   }
   return series

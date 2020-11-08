@@ -19,7 +19,7 @@
         </div>
       </el-drawer>
       <!-- https://www.cnblogs.com/whoani/p/11377793.html 具体参数设置 -->
-      <grid-layout 
+      <grid-layout
         :layout="testLayout"
         :col-num="50"
         :row-height="30"
@@ -54,7 +54,7 @@
 </template>
 <script>
 import VueGridLayout from 'vue-grid-layout'
-import echarts from 'echarts'
+// import echarts from 'echarts'
 import { getBarChartData, getLineChartData, getCircularChartData } from '../utils/load_api_charts'
 var GridLayout = VueGridLayout.GridLayout
 var GridItem = VueGridLayout.GridItem
@@ -171,7 +171,7 @@ export default {
           }
         }
       ],
-      echartsMember: [],
+      echartsMember: []
     }
   },
   components: {
@@ -188,7 +188,7 @@ export default {
     // 3. 纵向份数
     // 4. 图块-宽高-位置
     // 5. 图块数据
-    clearMouseDown(e) {
+    clearMouseDown (e) {
       console.log(123)
       e.stopPropagation()
       return false
@@ -211,7 +211,7 @@ export default {
         }
       })
     },
-    resizeAllEcharts() {
+    resizeAllEcharts () {
       this.$nextTick(() => {
         window.onresize = () => {
           for (let i = 0; i < this.testLayout.length; i++) {
@@ -227,20 +227,20 @@ export default {
       //   }
       // })
     },
-    getDrawer() {
+    getDrawer () {
       this.$router.push('/addCharts')
       // this.drawer = true
     },
-    handleClose() {
+    handleClose () {
       this.drawer = false
     },
-    cancelForm() {
+    cancelForm () {
       this.drawer = false
     },
-    successForm() {
+    successForm () {
 
     },
-    loadAllEcharts() {
+    loadAllEcharts () {
       let echartsDom = document.querySelectorAll('.echarts')
       for (let i = 0; i < echartsDom.length; i++) {
         let myechart = this.$echarts.init(echartsDom[i])
@@ -250,14 +250,14 @@ export default {
         this.resizeAllEcharts()
       }
     },
-    loadSingleEcharts() {
+    loadSingleEcharts () {
       let echartsDom = document.querySelectorAll('.echarts')
       let i = echartsDom.length - 1
       let myechart = this.$echarts.init(echartsDom[i])
       myechart.setOption(this.loadOptions(i, echartsDom))
       this.echartsMember.push(myechart)
     },
-    loadOptions(i, echartsDom) {
+    loadOptions (i, echartsDom) {
       let options = null
       if (echartsDom[i].id === 'zhu') {
         options = getBarChartData(this.testLayout[i].echarts)

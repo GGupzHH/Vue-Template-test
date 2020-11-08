@@ -64,21 +64,21 @@ export default {
       echartsxAxisName: '这是横坐标',
       echartsyAxisName: '这事纵坐标',
       tableData: [
-        {"legend": "图例", "x1": "Mon", "x2": "Tue", "x3": "Wed", "x4": "Thu", "x5": "Fri", "x6": "Sat", "x7": "Sun"},
-        {"legend": "赵伟", "x1": "120", "x2": "121", "x3": "105", "x4": "112", "x5": "121", "x6": "105", "x7": "105"},
-        {"legend": "李伟", "x1": "102", "x2": "111", "x3": "111", "x4": "121", "x5": "141", "x6": "111", "x7": "111"},
+        { 'legend': '图例', 'x1': 'Mon', 'x2': 'Tue', 'x3': 'Wed', 'x4': 'Thu', 'x5': 'Fri', 'x6': 'Sat', 'x7': 'Sun' },
+        { 'legend': '赵伟', 'x1': '120', 'x2': '121', 'x3': '105', 'x4': '112', 'x5': '121', 'x6': '105', 'x7': '105' },
+        { 'legend': '李伟', 'x1': '102', 'x2': '111', 'x3': '111', 'x4': '121', 'x5': '141', 'x6': '111', 'x7': '111' }
         // {"legend": "孙伟", "x1": "130", "x2": "131", "x3": "123", "x4": "141", "x5": "151", "x6": "123", "x7": "123"},
         // {"legend": "周伟", "x1": "111", "x2": "141", "x3": "132", "x4": "131", "x5": "111", "x6": "132", "x7": "132"},
       ],
       columns: [
-        {field: 'legend', title:'图例', width: 150, titleAlign: 'center',columnAlign:'center', isFrozen: true, isEdit: true, isResize: true},
-        {field: 'x1', title: 'Mon', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
-        {field: 'x2', title: 'Tue', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
-        {field: 'x3', title: 'Wed', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
-        {field: 'x4', title: 'Thu', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
-        {field: 'x5', title: 'Fri', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
-        {field: 'x6', title: 'Sat', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true},
-        {field: 'x7', title: 'Sun', width: 120, titleAlign: 'center',columnAlign:'center', isEdit: true, isResize: true}
+        { field: 'legend', title: '图例', width: 150, titleAlign: 'center', columnAlign: 'center', isFrozen: true, isEdit: true, isResize: true },
+        { field: 'x1', title: 'Mon', width: 120, titleAlign: 'center', columnAlign: 'center', isEdit: true, isResize: true },
+        { field: 'x2', title: 'Tue', width: 120, titleAlign: 'center', columnAlign: 'center', isEdit: true, isResize: true },
+        { field: 'x3', title: 'Wed', width: 120, titleAlign: 'center', columnAlign: 'center', isEdit: true, isResize: true },
+        { field: 'x4', title: 'Thu', width: 120, titleAlign: 'center', columnAlign: 'center', isEdit: true, isResize: true },
+        { field: 'x5', title: 'Fri', width: 120, titleAlign: 'center', columnAlign: 'center', isEdit: true, isResize: true },
+        { field: 'x6', title: 'Sat', width: 120, titleAlign: 'center', columnAlign: 'center', isEdit: true, isResize: true },
+        { field: 'x7', title: 'Sun', width: 120, titleAlign: 'center', columnAlign: 'center', isEdit: true, isResize: true }
       ],
       echartsData: '',
       placeholder: '',
@@ -95,33 +95,33 @@ export default {
   created () {
   },
   methods: {
-    showDialogVisible(type, p_text, title) {
+    showDialogVisible (type, pText, title) {
       this.dialogVisible = true
       this.chartsType = type
-      this.placeholder = p_text
+      this.placeholder = pText
       this.dialogTitle = title
       this.echartsData = this[type]
     },
-    chartsChangeTableData() {
+    chartsChangeTableData () {
       // console.log(Barchart)
       let options = getBarchartData(this.tableData, this.columns, this.echartsName, this.echartsxAxisName, this.echartsyAxisName)
       console.log(options)
       this.setEcharts(options)
     },
-    cellEditDone(newValue, oldValue, rowIndex, rowData, field) {
+    cellEditDone (newValue, oldValue, rowIndex, rowData, field) {
       this.tableData[rowIndex][field] = newValue
       this.chartsChangeTableData()
     },
-    editEchartsConfig() {
+    editEchartsConfig () {
       this[this.chartsType] = this.echartsData
       this.chartsChangeTableData()
       this.dialogVisible = false
     },
-    getCharts(item) {
+    getCharts (item) {
       this.drawer = true
       this.chartsChangeTableData()
     },
-    setEcharts(options) {
+    setEcharts (options) {
       this.$nextTick(() => {
         let echartsDom = document.querySelector('#echarts')
         let myEcharts = this.$echarts.init(echartsDom)
@@ -129,27 +129,27 @@ export default {
         myEcharts.setOption(options)
       })
     },
-    addRow() {
+    addRow () {
 
     },
-    addCol() {
+    addCol () {
 
     },
-    delRow() {
+    delRow () {
 
     },
-    delCol() {
+    delCol () {
 
     },
-    laodApiData() {
-      let series_data = []
+    laodApiData () {
+      let seriesData = []
       for (let i = 0; i < this.options.series.length; i++) {
-        series_data.push({
+        seriesData.push({
           name: this.options.series[i].name,
           data: this.options.series[i].data
         })
       }
-      let grid_data = {
+      let gridData = {
         'x': 0,
         'y': 0,
         'w': 10,
@@ -161,10 +161,10 @@ export default {
           title: this.options.title.text,
           xAxis_data: this.options.xAxis.data,
           legend_data: this.options.legend.data,
-          series_data
+          seriesData
         }
       }
-      return grid_data
+      return gridData
     }
   },
   mounted () {
