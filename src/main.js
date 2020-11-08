@@ -20,7 +20,8 @@ import 'normalize.css'
 import 'vue-easytable/libs/themes-base/index.css'
 // 导入 table 和 分页组件
 import { VTable, VPagination } from 'vue-easytable'
-
+// 导入自定义按指令
+import directive from './directive'
 // 注册到全局
 Vue.component(VTable.name, VTable)
 Vue.component(VPagination.name, VPagination)
@@ -30,6 +31,7 @@ Vue.use(api)
 Vue.use(ElementUI)
 Vue.use(iView)
 Vue.use(TYPE_JUDGE)
+Vue.use(directive)
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 

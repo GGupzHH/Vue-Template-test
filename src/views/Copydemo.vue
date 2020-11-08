@@ -3,16 +3,17 @@
     <div class="copy-cen">
       <div class="url" ref="url">https://www.jianshu.com/p/30795df87bac</div>
       <button @click="onCopy">点我复制</button>
+      <button v-copy="copyData">自定义指令实现 点我复制</button>
     </div>
   </div>
 </template>
 
 <script>
-
+import { Message } from 'element-ui'
 export default {
   data () {
     return {
-
+      copyData: 'http://shinewing.com'
     }
   },
   components: {},
@@ -35,7 +36,10 @@ export default {
       input.setSelectionRange(0, val.length)
       if (document.execCommand('copy')) {
         document.execCommand('copy')
-        console.log('复制成功')
+        Message.success({
+          message: '复制成功!',
+          showClose: true
+        })
       }
       document.body.removeChild(input)
     }
@@ -64,8 +68,8 @@ export default {
       display: block;
       // display: inline-block;
       margin: 20px auto;
-      width: 85px;
       height: 32px;
+      padding: 0px 12px;
       line-height: 32px;
       outline: none;
       background-color: rgb(113, 88, 255);
