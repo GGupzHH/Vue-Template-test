@@ -31,7 +31,7 @@ export const getBarChartData = (data) => {
         }
       }
     },
-    series: loadSeriesData(data.series_data, 'bar')
+    series: loadSeriesData(data.seriesData, 'bar')
   }
 }
 
@@ -83,7 +83,7 @@ export const getLineChartData = (data) => {
         }
       }
     },
-    series: loadSeriesData(data.series_data, 'line')
+    series: loadSeriesData(data.seriesData, 'line')
   }
 }
 
@@ -114,7 +114,7 @@ export const getCircularChartData = (data) => {
       type: 'pie',
       radius: '55%',
       center: ['50%', '60%'],
-      data: data.series_data,
+      data: data.seriesData,
       emphasis: {
         itemStyle: {
           shadowBlur: 10,

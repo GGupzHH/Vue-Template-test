@@ -93,7 +93,7 @@ export default {
             title: '折线图',
             xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             legend_data: ['2011年', '2012年'],
-            series_data: [
+            seriesData: [
               {
                 name: '2011年',
                 data: [110, 42, 21, 82, 54, 89, 65]
@@ -116,7 +116,7 @@ export default {
             title: '折线图堆叠',
             legend_data: ['邮件营销', '联盟广告'],
             xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            series_data: [
+            seriesData: [
               {
                 name: '邮件营销',
                 data: [120, 132, 101, 134, 90, 230, 210]
@@ -138,7 +138,7 @@ export default {
           echarts: {
             title: '折线图堆叠',
             legend_data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
-            series_data: [
+            seriesData: [
               { value: 335, name: '直接访问' },
               { value: 310, name: '邮件营销' },
               { value: 234, name: '联盟广告' },
@@ -159,7 +159,7 @@ export default {
             title: '折线图',
             xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             legend_data: ['2011年', '2012年'],
-            series_data: [
+            seriesData: [
               {
                 name: '2011年',
                 data: [110, 42, 21, 82, 54, 89, 65]
@@ -254,6 +254,9 @@ export default {
       let echartsDom = document.querySelectorAll('.echarts')
       let i = echartsDom.length - 1
       let myechart = this.$echarts.init(echartsDom[i])
+      console.log(i)
+      console.log(echartsDom)
+      console.log(this.testLayout)
       myechart.setOption(this.loadOptions(i, echartsDom))
       this.echartsMember.push(myechart)
     },
@@ -294,7 +297,7 @@ export default {
     //       echarts: {
     //         title: '折线图堆叠',
     //         xAxis_data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    //         series_data: [110, 42, 21, 82, 54, 89, 65]
+    //         seriesData: [110, 42, 21, 82, 54, 89, 65]
     //       }
     //     })
     //     this.$nextTick(() => {
